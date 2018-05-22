@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product';
-import { ProductDataService } from '../../services/product-data.service';
+import { Product } from '../../../models/product';
+import { ProductDataService } from '../../../services/product-data.service';
 
 @Component({
   selector: 'app-product-dashboard-view',

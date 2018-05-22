@@ -17,8 +17,8 @@ export class ProductService {
 
   searchProducts(searchPattern: string): Observable<Product[]> {
     if (!searchPattern.trim()) {
-      return of([])
+      return this.getAllProducts()
     }
-    return this.http.get<Product[]>(this.URL+`products/${searchPattern}`)
+    return this.http.get<Product[]>(this.URL + `products/${searchPattern}`)
   }
 }

@@ -9,6 +9,8 @@ import { ProductsDashboardNavComponent } from './components/products-dashboard-n
 import { ProductComponent } from './components/product/product.component';
 import { ProductService } from './services/product.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductDashboardViewComponent } from './components/product-dashboard-view/product-dashboard-view.component';
+import { ProductDataService } from './services/product-data.service';
 
 
 @NgModule({
@@ -17,13 +19,14 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     ProductsDashboardComponent,
     ProductsDashboardNavComponent,
-    ProductComponent
+    ProductComponent,
+    ProductDashboardViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, ProductDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

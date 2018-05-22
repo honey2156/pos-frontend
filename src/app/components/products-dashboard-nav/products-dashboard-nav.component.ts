@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
+import { ProductDataService } from '../../services/product-data.service';
 
 @Component({
   selector: 'app-products-dashboard-nav',
@@ -7,9 +10,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsDashboardNavComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private productService: ProductService,
+    private productDataService: ProductDataService) { }
 
   ngOnInit() {
+    this.getAllProducts()
   }
 
+  updateProducts(products: Product[]) {
+    this.productDataService.updateProducts(products)
+  }
+
+  getAllProducts() {
+    this.productService.getAllProducts()
+      .subscribe((products) => {
+        this.updateProducts(products)
+      })
+  }
+
+  searchProducts(searchPattern: string) {
+    this.productService.searchProducts(searchPattern)
+      .subscribe((products) => {
+        this.updateProducts(products)
+      })
+  }
 }

@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductDashboardViewComponent } from './components/products/product-dashboard-view/product-dashboard-view.component';
 import { ProductDataService } from './services/product-data.service';
 import { CartDashboardComponent } from './components/cart/cart-dashboard/cart-dashboard.component';
+import { CartDashboardNavComponent } from './components/cart/cart-dashboard-nav/cart-dashboard-nav.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { CartDashboardComponent } from './components/cart/cart-dashboard/cart-da
     ProductsDashboardNavComponent,
     ProductComponent,
     ProductDashboardViewComponent,
-    CartDashboardComponent
+    CartDashboardComponent,
+    CartDashboardNavComponent
   ],
   imports: [
     BrowserModule,

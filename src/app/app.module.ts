@@ -13,6 +13,8 @@ import { ProductDashboardViewComponent } from './components/products/product-das
 import { ProductDataService } from './services/product-data.service';
 import { CartDashboardComponent } from './components/cart/cart-dashboard/cart-dashboard.component';
 import { CartDashboardNavComponent } from './components/cart/cart-dashboard-nav/cart-dashboard-nav.component';
+import { CartDashboardViewComponent } from './components/cart/cart-dashboard-view/cart-dashboard-view.component';
+import { CustomerService } from './services/customer.service';
 
 
 @NgModule({
@@ -24,13 +26,14 @@ import { CartDashboardNavComponent } from './components/cart/cart-dashboard-nav/
     ProductComponent,
     ProductDashboardViewComponent,
     CartDashboardComponent,
-    CartDashboardNavComponent
+    CartDashboardNavComponent,
+    CartDashboardViewComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule
   ],
-  providers: [ProductService, ProductDataService],
+  providers: [ProductService, ProductDataService, CustomerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

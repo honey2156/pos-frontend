@@ -1,10 +1,23 @@
-<nav class="navbar navbar-light bg-light">
-  <div>
+<nav class="navbar navbar-light bg-light mb-3">
+  <a class="navbar-brand">Cart</a>
+  <div class="form-inline">
     <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Search</span>
+      <input #customerSearchInput class="form-control" placeholder="Search customer">
+      <div class="input-group-append">
+        <button (click)="searchCustomers(customerSearchInput.value);customerSearchInput.value=''" class="btn btn-outline-secondary"
+          type="button">Search</button>
       </div>
-      <input class="form-control" placeholder="Search customer">
     </div>
   </div>
 </nav>
+
+<div class="container mt-3 mb-3" *ngIf="customers.length > 0">
+  <div class="card p-1" style="overflow-y: auto;max-height: 150px;">
+    <ul class="list-group-item">
+      <li *ngFor="let customer of customers" class="list-group-item">
+        {{customer.name}}
+        <div style="float: right;">{{customer.email}}</div>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../../models/customer';
 import { CustomerService } from '../../../services/customer.service';
+import { CartCustomerDataService } from '../../../services/cart-customer-data.service';
 
 @Component({
   selector: 'app-cart-dashboard-nav',
@@ -11,7 +12,9 @@ export class CartDashboardNavComponent implements OnInit {
 
   customers: Customer[]
 
-  constructor(private customerService: CustomerService) { 
+  constructor(
+    private customerService: CustomerService,
+    private cartCustomerDataService: CartCustomerDataService) {
     this.customers = []
   }
 
@@ -23,6 +26,11 @@ export class CartDashboardNavComponent implements OnInit {
       .subscribe((customers) => {
         this.customers = customers
       })
+  }
+
+  selectCustomerCart(customer: Customer) {
+    this.cartCustomerDataService.changeCustomer(customer)
+    this.customers = []
   }
 
 }

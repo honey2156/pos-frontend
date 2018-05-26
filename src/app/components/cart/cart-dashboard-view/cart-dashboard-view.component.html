@@ -1,5 +1,8 @@
 <div class="container" style="height: 100%;">
-  <div class="card p-1" style="min-height: 600px;">
+  <div class="card p-2" style="min-height: 600px;">
+    <div *ngIf="customer.id !== undefined" class="pl-3 m-2">
+      <i>{{customer.name}}</i>
+    </div>
     <ul class="list-group">
       <li class="list-group-item">
         Subtotal

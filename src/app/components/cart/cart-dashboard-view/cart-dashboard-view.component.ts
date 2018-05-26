@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Customer } from '../../../models/customer';
+import { CartCustomerDataService } from '../../../services/cart-customer-data.service';
 
 @Component({
   selector: 'app-cart-dashboard-view',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartDashboardViewComponent implements OnInit {
 
-  constructor() { }
+  customer: Customer
+
+  constructor(private cartCustomerDataService: CartCustomerDataService) {
+    this.customer = new Customer()
+   }
 
   ngOnInit() {
+    this.cartCustomerDataService.currentCustomer
+      .subscribe((customer) => {
+        this.customer = customer
+      })
   }
+
+
 
 }

@@ -21,6 +21,8 @@ import { OrdersListDasboardComponent } from './components/orders-list-dasboard/o
 import { SaveOrdersDasboardComponent } from './components/save-orders-dasboard/save-orders-dasboard.component';
 import { CashDrawerComponent } from './components/cash-drawer/cash-drawer.component';
 import { ReportComponent } from './components/report/report.component';
+import { CartProductDataService } from './services/cart-product-data.service';
+import { CartCustomerDataService } from './services/cart-customer-data.service';
 
 
 @NgModule({
@@ -45,7 +47,7 @@ import { ReportComponent } from './components/report/report.component';
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [ProductService, ProductDataService, CustomerService],
+  providers: [ProductService, ProductDataService, CustomerService, CartProductDataService, CartCustomerDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

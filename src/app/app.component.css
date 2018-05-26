@@ -1,0 +1,41 @@
+/* .hNav {
+    grid-area: nv;
+}
+.hPDash {
+    grid-area: pd;
+}
+.hCDash {
+    grid-area: cd;
+}
+.hGrid {
+    display: grid;
+    grid-gap: 20px;
+    justify-items: center;
+    justify-items: stretch;
+    align-items: stretch;
+}
+.hGrid-m {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+        "nv nv nv nv nv nv"
+        "pd pd pd pd cd cd"
+        "pd pd pd pd cd cd"
+        "pd pd pd pd cd cd"
+        "pd pd pd pd cd cd"
+        ;
+    justify-items: center;
+}
+@media (max-width: 700px) {
+    .hGrid-m {
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: minmax(min-content, auto);
+        grid-template-areas:
+            "nv"
+            "cd"
+            "cd"
+            "pd"
+            "pd"
+            "pd"
+            ;
+    }
+} */

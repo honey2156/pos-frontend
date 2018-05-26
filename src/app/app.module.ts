@@ -15,6 +15,12 @@ import { CartDashboardComponent } from './components/cart/cart-dashboard/cart-da
 import { CartDashboardNavComponent } from './components/cart/cart-dashboard-nav/cart-dashboard-nav.component';
 import { CartDashboardViewComponent } from './components/cart/cart-dashboard-view/cart-dashboard-view.component';
 import { CustomerService } from './services/customer.service';
+import { AppRoutingModule } from './/app-routing.module';
+import { CheckoutDasboardComponent } from './components/checkout-dasboard/checkout-dasboard.component';
+import { OrdersListDasboardComponent } from './components/orders-list-dasboard/orders-list-dasboard.component';
+import { SaveOrdersDasboardComponent } from './components/save-orders-dasboard/save-orders-dasboard.component';
+import { CashDrawerComponent } from './components/cash-drawer/cash-drawer.component';
+import { ReportComponent } from './components/report/report.component';
 
 
 @NgModule({
@@ -27,11 +33,17 @@ import { CustomerService } from './services/customer.service';
     ProductDashboardViewComponent,
     CartDashboardComponent,
     CartDashboardNavComponent,
-    CartDashboardViewComponent
+    CartDashboardViewComponent,
+    CheckoutDasboardComponent,
+    OrdersListDasboardComponent,
+    SaveOrdersDasboardComponent,
+    CashDrawerComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [ProductService, ProductDataService, CustomerService],
   bootstrap: [AppComponent]

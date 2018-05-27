@@ -27,6 +27,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { LoginDataService } from './services/login-data.service';
+import { CashDrawerService } from './services/cash-drawer.service';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ import { LoginDataService } from './services/login-data.service';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ProductService, ProductDataService, CustomerService, CartProductDataService, CartCustomerDataService, LoginService, LoginDataService],
+  providers: [ProductService, ProductDataService, CustomerService, CartProductDataService, CartCustomerDataService, LoginService, LoginDataService, CashDrawerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,7 @@ export class Order {
     employeeId: number
     status: boolean
     orderDate: string
+    orderTime: string
     paymentMode: string
     totalAmount: number
     orderDetails: OrderDetail[]

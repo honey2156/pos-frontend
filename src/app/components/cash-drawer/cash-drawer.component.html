@@ -1,3 +1,9 @@
-<p>
-  cash-drawer works!
-</p>
+<div>
+  <div class="card p-2 m-2" style="width: 300px;">
+    <label>{{startingBalance}}</label>
+    <label>{{endingBalance}}</label>
+    <input #balanceInput type="text" placeholder="Enter starting balance">
+    <button (click)="setOpeningBalance(balanceInput.value)">Enter</button>
+  </div>
+
+</div>

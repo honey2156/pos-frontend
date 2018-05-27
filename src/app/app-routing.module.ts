@@ -5,9 +5,11 @@ import { CheckoutDasboardComponent } from './components/checkout-dasboard/checko
 import { OrdersListDasboardComponent } from './components/orders-list-dasboard/orders-list-dasboard.component';
 import { SaveOrdersDasboardComponent } from './components/save-orders-dasboard/save-orders-dasboard.component';
 import { ReportComponent } from './components/report/report.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'checkout', pathMatch: 'full' },
+  { path: "login", component: LoginComponent },
   { path: 'checkout', component: CheckoutDasboardComponent },
   { path: 'orders', component: OrdersListDasboardComponent },
   { path: 'saved-orders', component: SaveOrdersDasboardComponent },

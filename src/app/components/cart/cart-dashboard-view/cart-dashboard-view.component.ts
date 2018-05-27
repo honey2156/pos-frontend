@@ -35,7 +35,7 @@ export class CartDashboardViewComponent implements OnInit {
     this.cartProductDataService.currentProduct
       .subscribe((cartProduct) => {
         if (cartProduct && cartProduct.id) {
-          if(this.customer.id === undefined){
+          if (this.customer.id === undefined) {
             alert("select customer first")
             return
           }
@@ -47,8 +47,13 @@ export class CartDashboardViewComponent implements OnInit {
             orderDetail.quantity = 0;
             this.orderDetails.push(orderDetail)
           }
-          orderDetail.quantity++
-          this.orderDetails = this.orderDetails.filter((cartProduct) => cartProduct.quantity > 0)
+          if (cartProduct.stock - orderDetail.quantity > 0) {
+            orderDetail.quantity++
+            this.orderDetails = this.orderDetails.filter((cartProduct) => cartProduct.quantity > 0)
+          }
+          else {
+            alert('product stock limit reached')
+          }
         }
         this.maintainTotals()
       })
@@ -56,8 +61,13 @@ export class CartDashboardViewComponent implements OnInit {
 
   incrementProductQuantity(oDetail: OrderDetail) {
     let orderDetail = this.orderDetails.find((p) => p.productId === oDetail.productId)
-    orderDetail.quantity++
-    this.orderDetails = this.orderDetails.filter((cartProduct) => cartProduct.quantity > 0)
+    if (orderDetail.product.stock - orderDetail.quantity > 0) {
+      orderDetail.quantity++
+      this.orderDetails = this.orderDetails.filter((cartProduct) => cartProduct.quantity > 0)
+    }
+    else {
+      alert('product stock limit reached')
+    }
     this.maintainTotals()
   }
 
@@ -84,7 +94,7 @@ export class CartDashboardViewComponent implements OnInit {
     this.calculateTotal()
   }
 
-  clearCart(){
+  clearCart() {
     this.orderDetails = []
     this.maintainTotals()
   }

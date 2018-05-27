@@ -23,6 +23,10 @@ import { CashDrawerComponent } from './components/cash-drawer/cash-drawer.compon
 import { ReportComponent } from './components/report/report.component';
 import { CartProductDataService } from './services/cart-product-data.service';
 import { CartCustomerDataService } from './services/cart-customer-data.service';
+import { LoginComponent } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { LoginService } from './services/login.service';
+import { LoginDataService } from './services/login-data.service';
 
 
 @NgModule({
@@ -40,14 +44,16 @@ import { CartCustomerDataService } from './services/cart-customer-data.service';
     OrdersListDasboardComponent,
     SaveOrdersDasboardComponent,
     CashDrawerComponent,
-    ReportComponent
+    ReportComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [ProductService, ProductDataService, CustomerService, CartProductDataService, CartCustomerDataService],
+  providers: [ProductService, ProductDataService, CustomerService, CartProductDataService, CartCustomerDataService, LoginService, LoginDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

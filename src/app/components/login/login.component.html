@@ -1,0 +1,13 @@
+<div>
+  <div class="card p-2 m-4" style="width: 400px;">
+    <div>
+      <h3>Login</h3>
+      <hr>
+    </div>
+    <form #userLogin="ngForm" (ngSubmit)="login(userLogin)" class="form-group" name="loginForm" novalidate>
+      <input type="text" name="username" class="form-control m-1" placeholder="username" ngModel>
+      <input type="password" name="password" class="form-control m-1" placeholder="password" ngModel>
+      <input type="submit" value="Login" class="form-control m-1 btn btn-primary">
+    </form>
+  </div>
+</div>

@@ -4,17 +4,41 @@
       <i>{{customer.name}}</i>
     </div>
     <ul class="list-group">
+
+      <table class="table" *ngIf="customer.id !== undefined">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Unit price</th>
+            <th scope="col">Qty.</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="orderDetails.length > 0">
+          <tr *ngFor="let orderDetail of orderDetails">
+            <td>{{orderDetail.product.name}}</td>
+            <td>{{orderDetail.product.price}}</td>
+            <td>
+              <button (click)="incrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">+</button>
+              {{orderDetail.quantity}}
+              <button (click)="decrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">-</button>
+            </td>
+            <td>{{orderDetail.quantity * orderDetail.product.price}}</td>
+          </tr>
+        </tbody>
+      </table>
+
       <li class="list-group-item">
         Subtotal
-        <div style="float: right;">Rs. 0.00</div>
+        <div style="float: right;">Rs. {{subtotal}}</div>
       </li>
       <li class="list-group-item">
         Tax
-        <div style="float: right;">Rs. 0.00</div>
+        <div style="float: right;">Rs. {{tax}}</div>
       </li>
       <li class="list-group-item">
         Grand Total
-        <div style="float: right;">Rs. 0.00</div>
+        <div style="float: right;">Rs. {{total}}</div>
       </li>
     </ul>
 

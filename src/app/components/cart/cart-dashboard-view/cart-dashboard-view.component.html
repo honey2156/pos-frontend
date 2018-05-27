@@ -2,6 +2,7 @@
   <div class="card p-2" style="min-height: 600px;">
     <div *ngIf="customer.id !== undefined" class="pl-3 m-2">
       <i>{{customer.name}}</i>
+      <button (click)="clearCart()" class="btn btn-danger btn-sm">clear</button>
     </div>
     <ul class="list-group">
 

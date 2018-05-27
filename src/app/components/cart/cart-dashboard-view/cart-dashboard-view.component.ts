@@ -35,6 +35,10 @@ export class CartDashboardViewComponent implements OnInit {
     this.cartProductDataService.currentProduct
       .subscribe((cartProduct) => {
         if (cartProduct && cartProduct.id) {
+          if(this.customer.id === undefined){
+            alert("select customer first")
+            return
+          }
           let orderDetail = this.orderDetails.find((p) => p.productId === cartProduct.id)
           if (orderDetail === undefined) {
             orderDetail = new OrderDetail()
@@ -78,6 +82,11 @@ export class CartDashboardViewComponent implements OnInit {
   maintainTotals() {
     this.calculateSubTotal()
     this.calculateTotal()
+  }
+
+  clearCart(){
+    this.orderDetails = []
+    this.maintainTotals()
   }
 
 }

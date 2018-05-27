@@ -1,9 +1,13 @@
 <div>
   <div class="card p-2 m-2" style="width: 300px;">
-    <label>{{startingBalance}}</label>
-    <label>{{endingBalance}}</label>
-    <input #balanceInput type="text" placeholder="Enter starting balance">
-    <button (click)="setOpeningBalance(balanceInput.value)">Enter</button>
+    <div *ngIf="drawer">
+      <h5>Drawer details</h5>
+      <hr>
+      <label>Starting Balance : {{drawer.startingBalance}}</label>
+      <label>Closing Balance : {{drawer.endingBalance}}</label>
+    </div>
+    <input #balanceInput type="text" placeholder="Enter starting balance" class="form-control">
+    <button (click)="setOpeningBalance(balanceInput.value)" class="form-control btn btn-primary">Enter</button>
   </div>
 
 </div>

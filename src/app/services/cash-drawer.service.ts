@@ -18,11 +18,11 @@ export class CashDrawerService {
     return this.http.get<CashDrawer>(this.URL+`${employeeId}/drawers`)
   }
 
-  setOpeningDrawer(employeeId:number, drawer){
+  setOpeningDrawer(employeeId:number, drawer):Observable<any>{
     return this.http.post<CashDrawer>(this.URL+`${employeeId}/drawers`, drawer, httpOptions)
   }
 
   setClosingDrawer(employeeId:number, drawer){
-    return this.http.post<CashDrawer>(this.URL+`${employeeId}/drawers`, drawer, httpOptions)
+    return this.http.put<CashDrawer>(this.URL+`${employeeId}/drawers`, drawer, httpOptions)
   }
 }

@@ -12,11 +12,12 @@ export class CashDrawerComponent implements OnInit {
   drawer:CashDrawer
   employeeId:number
 
-  constructor(private cashDrawerService:CashDrawerService) { }
+  constructor(private cashDrawerService:CashDrawerService) {
+    this.drawer = new CashDrawer()
+   }
 
   ngOnInit() {
     this.employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
-    console.log(this.employeeId)
     this.getCashDrawer()
   }
 
@@ -29,5 +30,9 @@ export class CashDrawerComponent implements OnInit {
 
   setOpeningBalance(startingBalance:number){
     this.cashDrawerService.setOpeningDrawer(this.employeeId, {startingBalance} as CashDrawer)
+    .subscribe((data)=>{
+      console.log(data)
+      this.getCashDrawer()
+    })
   }
 }

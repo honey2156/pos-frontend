@@ -1,0 +1,53 @@
+<div *ngIf="order && order.id">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand">Order Id: #{{order.id}}</a>
+  </nav>
+  <div style="text-align: center;">
+    <h4>{{order.totalAmount | currency:'&#8377;'}}</h4>
+    <p>created date:
+      <b>{{order.orderDate}} {{order.orderTime}}</b>
+    </p>
+    <p>Status :
+      <b *ngIf="order.status">Complete</b>
+      <b *ngIf="!order.status">On Hold</b>
+    </p>
+    <hr>
+  </div>
+
+  <div>
+    <div class="navbar navbar-light bg-light">
+      <h6>Mode of payment</h6>
+    </div>
+    <p *ngIf="order.paymentMode">{{order.paymentMode}} ONLY</p>
+    <p *ngIf="!order.paymentMode">Payment Due</p>
+    <hr>
+  </div>
+
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Products</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of orderDetail">
+          <td>{{detail.product.name}}</td>
+          <td>{{detail.price | currency:'&#8377;'}}</td>
+          <td>{{detail.quantity}}</td>
+          <td>{{detail.price * detail.quantity | currency:'&#8377;' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+  </div>
+
+  <div>
+    <p>Subtotal : {{order.totalAmount - 10 | currency:'&#8377;'}}</p>
+    <p>Tax : {{10 | currency:'&#8377;'}}</p>
+    <p>Grand Total : {{order.totalAmount | currency:'&#8377;'}}</p>
+  </div>
+</div>

@@ -1,27 +1,37 @@
-<div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Total</th>
-        <th scope="col">Customer</th>
-        <th scope="col">Time</th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
+<div class="container-fluid">
+  <div class="row">
+    <!-- Master View -->
+    <div class="col">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Total</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Time</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
 
-    <tbody *ngIf="orders && orders.length > 0">
-      <tr *ngFor="let order of orders">
-        <th scope="col">#{{order.id}}</th>
-        <td>{{order.totalAmount | currency:'&#8377;'}}</td>
-        <td>customerId</td>
-        <td>{{order.orderTime}}</td>
-        <td *ngIf="order.status">Complete</td>
-        <td *ngIf="!order.status">On Hold</td>
-      </tr>
-    </tbody>
-  </table>
-  <div *ngIf="orders && orders.length == 0" style="text-align: center">
-    <h5>No Orders yet!</h5>
+        <tbody *ngIf="orders && orders.length > 0">
+          <tr *ngFor="let order of orders" (click)="displayOrderDetails(order)">
+            <th scope="col">#{{order.id}}</th>
+            <td>{{order.totalAmount | currency:'&#8377;'}}</td>
+            <td>{{order.customer.name}}</td>
+            <td>{{order.orderTime}}</td>
+            <td *ngIf="order.status">Complete</td>
+            <td *ngIf="!order.status">On Hold</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="orders && orders.length == 0" style="text-align: center">
+        <h5>No Orders yet!</h5>
+      </div>
+    </div>
+
+    <!-- detail view-->
+    <div class="col">
+      <app-orders-list-detail [order]="orderView" [orderDetail]="orderView.orderDetails"></app-orders-list-detail>
+    </div>
   </div>
 </div>

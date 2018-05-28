@@ -14,7 +14,7 @@
       <tr *ngFor="let order of orders">
         <th scope="col">#{{order.id}}</th>
         <td>{{order.totalAmount | currency:'&#8377;'}}</td>
-        <td>customerId</td>
+        <td>{{order.customer.name}}</td>
         <td>{{order.orderTime}}</td>
         <td *ngIf="order.status">Complete</td>
         <td *ngIf="!order.status">On Hold</td>

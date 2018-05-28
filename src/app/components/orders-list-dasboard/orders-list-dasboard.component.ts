@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { Order } from '../../models/order';
+import { OrderDetail } from '../../models/order_detail';
 
 @Component({
   selector: 'app-orders-list-dasboard',
@@ -10,6 +11,7 @@ import { Order } from '../../models/order';
 export class OrdersListDasboardComponent implements OnInit {
 
   orders: Order[] = []
+  orderView: Order = new Order()
 
   constructor(private orderService: OrderService) { }
 
@@ -23,5 +25,9 @@ export class OrdersListDasboardComponent implements OnInit {
       .subscribe((orders) => {
         this.orders = orders
       })
+  }
+
+  displayOrderDetails(order) {
+    this.orderView = order
   }
 }

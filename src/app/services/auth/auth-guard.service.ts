@@ -9,6 +9,7 @@ export class AuthGuardService {
 
   canActivate(): boolean {
     if (!this.auth.isAuthenticated()) {
+      alert("You are not logged in!");
       this.router.navigate(['login'])
       return false
     }

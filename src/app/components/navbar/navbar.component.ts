@@ -13,12 +13,11 @@ export class NavbarComponent implements OnInit {
   loggedUser: Employee
 
   constructor(private loginDataService: LoginDataService, private route: Router) {
-    this.loggedUser = new Employee()
+    this.loggedUser = this.getLoginStatus()
   }
 
   ngOnInit() {
     this.setLoginStatus()
-    this.getLoginStatus()
   }
 
   setLoginStatus() {
@@ -31,7 +30,12 @@ export class NavbarComponent implements OnInit {
   }
 
   getLoginStatus() {
-    console.log(localStorage.getItem('loggedUser'))
+    if (JSON.parse(localStorage.getItem('loggedUser'))) {
+      return JSON.parse(localStorage.getItem('loggedUser'))
+    }
+    else {
+      return new Employee()
+    }
   }
 
   logout() {

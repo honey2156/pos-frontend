@@ -12,6 +12,7 @@ import { CheckoutDasboardComponent } from './components/checkout-dasboard/checko
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OrdersListDasboardComponent } from './components/orders-list-dasboard/orders-list-dasboard.component';
+import { OrdersListDetailComponent } from './components/orders-list-detail/orders-list-detail.component';
 import { ProductDashboardViewComponent } from './components/products/product-dashboard-view/product-dashboard-view.component';
 import { ProductComponent } from './components/products/product/product.component';
 import { ProductsDashboardNavComponent } from './components/products/products-dashboard-nav/products-dashboard-nav.component';
@@ -29,7 +30,7 @@ import { LoginService } from './services/login.service';
 import { OrderService } from './services/order.service';
 import { ProductDataService } from './services/product-data.service';
 import { ProductService } from './services/product.service';
-import { OrdersListDetailComponent } from './components/orders-list-detail/orders-list-detail.component';
+import { ReloadCartService } from './services/reload-cart.service';
 
 
 
@@ -60,7 +61,8 @@ import { OrdersListDetailComponent } from './components/orders-list-detail/order
     FormsModule
   ],
   providers: [ProductService, ProductDataService, CustomerService, CartProductDataService,
-    CartCustomerDataService, LoginService, LoginDataService, CashDrawerService, OrderService, AuthService, AuthGuardService
+    CartCustomerDataService, LoginService, LoginDataService, CashDrawerService, OrderService,
+    AuthService, AuthGuardService, ReloadCartService
   ],
 
   bootstrap: [AppComponent]

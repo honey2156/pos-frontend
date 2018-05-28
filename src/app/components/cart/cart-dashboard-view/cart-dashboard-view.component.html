@@ -3,6 +3,7 @@
     <div *ngIf="customer.id !== undefined" class="pl-3 m-2">
       <i>{{customer.name}}</i>
       <button (click)="clearCart()" class="btn btn-danger btn-sm">clear</button>
+      <button (click)="resetCart()" class="btn btn-danger btn-sm">cancel</button>
     </div>
     <ul class="list-group">
 
@@ -20,9 +21,9 @@
             <td>{{orderDetail.product.name}}</td>
             <td>{{orderDetail.product.price | currency:'&#8377;'}}</td>
             <td>
-              <button *ngIf="!togglePaymentOptions" (click)="incrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">+</button>
+              <button *ngIf="!togglePaymentOptions && !disableButtons" (click)="incrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">+</button>
               {{orderDetail.quantity}}
-              <button *ngIf="!togglePaymentOptions" (click)="decrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">-</button>
+              <button *ngIf="!togglePaymentOptions && !disableButtons" (click)="decrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">-</button>
             </td>
             <td>{{orderDetail.quantity * orderDetail.product.price | currency:'&#8377;'}}</td>
           </tr>
@@ -56,7 +57,7 @@
       </div>
 
       <div class="form-inline">
-        <button class="btn btn-secondary m-2" (click)="saveOrder(paymentMode.value)">Save Order</button>
+        <button *ngIf="!disableButtons" class="btn btn-secondary m-2" (click)="saveOrder(paymentMode.value)">Save Order</button>
         <button class="btn btn-primary m-2" (click)="placeOrder(paymentMode.value)">Place Order</button>
       </div>
     </div>

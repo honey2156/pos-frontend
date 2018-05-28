@@ -7,6 +7,7 @@ import { CartProductDataService } from '../../../services/cart-product-data.serv
 import { Order } from '../../../models/order';
 import { OrderService } from '../../../services/order.service';
 import { Product } from '../../../models/product';
+import { ReloadCartService } from '../../../services/reload-cart.service';
 
 @Component({
   selector: 'app-cart-dashboard-view',
@@ -20,6 +21,8 @@ export class CartDashboardViewComponent implements OnInit {
   tax: number = 10
   total: number = 0
   subtotal: number = 0
+  reloadedOrder: Order
+  disableButtons: boolean = false
   paymentModes: PaymentMode[] = [
     { name: "Please select mode of payment", value: '' },
     { name: "Cash", value: "CASH" },
@@ -30,7 +33,8 @@ export class CartDashboardViewComponent implements OnInit {
   constructor(
     private cartCustomerDataService: CartCustomerDataService,
     private cartProductDataService: CartProductDataService,
-    private orderService: OrderService) {
+    private orderService: OrderService,
+    private reloadCartService: ReloadCartService) {
     this.customer = new Customer()
     this.orderDetails = []
   }
@@ -39,6 +43,16 @@ export class CartDashboardViewComponent implements OnInit {
     this.cartCustomerDataService.currentCustomer
       .subscribe((customer) => {
         this.customer = customer
+      })
+
+    this.reloadCartService.currentOrder
+      .subscribe((order) => {
+        this.reloadedOrder = order
+        if (order && order.id) {
+          this.customer = order.customer
+          this.orderDetails = order.orderDetails
+          this.disableButtons = true
+        }
       })
 
     this.cartProductDataService.currentProduct
@@ -109,13 +123,16 @@ export class CartDashboardViewComponent implements OnInit {
     this.maintainTotals()
   }
 
-  resetCart(){
+  resetCart() {
     this.customer = new Customer()
     this.orderDetails = []
     this.subtotal = 0
     this.togglePaymentOptions = false
+    this.disableButtons = false
+    this.reloadedOrder = new Order()
     this.cartProductDataService.updateProductInCart(new Product())
     this.cartCustomerDataService.changeCustomer(new Customer())
+    this.reloadCartService.updateOrder(new Order())
   }
 
   placeOrder(paymentMode: string) {
@@ -124,36 +141,41 @@ export class CartDashboardViewComponent implements OnInit {
       alert('please select payment mode')
       return
     }
-    let order = new Order()
-    order.employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
-    order.customerId = this.customer.id
-    order.paymentMode = paymentMode
+
+    let order: Order
+    if (this.reloadedOrder && this.reloadedOrder.id) {
+      order = this.reloadedOrder
+      order.paymentMode = paymentMode
+      order.employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
+      order.customerId = this.customer.id
+    } else {
+      order = this.createOrder(paymentMode)
+    }
     order.status = true
-    order.totalAmount = this.total
-    let oDetails = []
-    this.orderDetails.forEach(element => {
-      oDetails.push({
-        product: element.product,
-        price: element.price,
-        quantity: element.quantity
-      })
-    });
-
-    order.orderDetails = oDetails
-
     this.orderService.placeOrder(order)
       .subscribe((order) => {
         console.log(order)
-        alert("order placed : "+order.id)
+        alert("order placed : " + order.id)
       })
     this.resetCart()
   }
 
   saveOrder(paymentMode: string) {
+    let order = this.createOrder(paymentMode)
+    this.orderService.placeOrder(order)
+      .subscribe((order) => {
+        console.log(order)
+        alert("order saved : " + order.id)
+      })
+
+    this.resetCart()
+  }
+
+  createOrder(paymentMode: string) {
     let order = new Order()
     order.employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
     order.customerId = this.customer.id
-    order.status = false
+    order.paymentMode = paymentMode
     order.totalAmount = this.total
     let oDetails = []
     this.orderDetails.forEach(element => {
@@ -163,14 +185,8 @@ export class CartDashboardViewComponent implements OnInit {
         quantity: element.quantity
       })
     });
+
     order.orderDetails = oDetails
-
-    this.orderService.placeOrder(order)
-      .subscribe((order) => {
-        console.log(order)
-        alert("order saved : "+order.id)
-      })
-
-    this.resetCart()
+    return order
   }
 }

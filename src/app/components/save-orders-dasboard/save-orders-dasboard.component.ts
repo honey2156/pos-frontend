@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../../models/order';
 import { OrderService } from '../../services/order.service';
+import { ReloadCartService } from '../../services/reload-cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-save-orders-dasboard',
@@ -11,7 +13,10 @@ export class SaveOrdersDasboardComponent implements OnInit {
 
   orders: Order[] = []
 
-  constructor(private orderService: OrderService) { }
+  constructor(
+    private orderService: OrderService,
+    private reloadCartService: ReloadCartService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getEmployeeSavedOrders()
@@ -27,6 +32,7 @@ export class SaveOrdersDasboardComponent implements OnInit {
   }
 
   reloadOrder(order: Order) {
-
+    this.reloadCartService.updateOrder(order)
+    this.router.navigate(['checkout'])
   }
 }

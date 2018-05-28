@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="table">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -18,6 +18,9 @@
         <td>{{order.orderTime}}</td>
         <td *ngIf="order.status">Complete</td>
         <td *ngIf="!order.status">On Hold</td>
+        <td>
+          <button (click)="reloadOrder(order)" class="btn btn-outline-dark btn-sm"><i class="fas fa-sync-alt"></i></button>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -21,9 +21,12 @@ export class SaveOrdersDasboardComponent implements OnInit {
     let employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
     this.orderService.getEmployeeOrders(employeeId)
       .subscribe((orders) => {
-        orders = orders.filter(order=> order.status === false)
+        orders = orders.filter(order => order.status === false)
         this.orders = orders
       })
   }
 
+  reloadOrder(order: Order) {
+
+  }
 }

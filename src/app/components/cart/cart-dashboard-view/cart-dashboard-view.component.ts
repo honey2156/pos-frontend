@@ -136,12 +136,10 @@ export class CartDashboardViewComponent implements OnInit {
   }
 
   placeOrder(paymentMode: string) {
-    console.log(paymentMode)
     if (paymentMode == '') {
       alert('please select payment mode')
       return
     }
-
     let order: Order
     if (this.reloadedOrder && this.reloadedOrder.id) {
       order = this.reloadedOrder

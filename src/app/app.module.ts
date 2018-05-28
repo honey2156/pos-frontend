@@ -31,6 +31,7 @@ import { OrderService } from './services/order.service';
 import { ProductDataService } from './services/product-data.service';
 import { ProductService } from './services/product.service';
 import { ReloadCartService } from './services/reload-cart.service';
+import { SavedOrdersDetailComponent } from './components/saved-orders-detail/saved-orders-detail.component';
 
 
 
@@ -52,7 +53,8 @@ import { ReloadCartService } from './services/reload-cart.service';
     CashDrawerComponent,
     ReportComponent,
     LoginComponent,
-    OrdersListDetailComponent
+    OrdersListDetailComponent,
+    SavedOrdersDetailComponent
   ],
   imports: [
     BrowserModule,

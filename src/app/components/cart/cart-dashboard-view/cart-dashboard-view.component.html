@@ -18,28 +18,28 @@
         <tbody *ngIf="orderDetails.length > 0">
           <tr *ngFor="let orderDetail of orderDetails">
             <td>{{orderDetail.product.name}}</td>
-            <td>{{orderDetail.product.price}}</td>
+            <td>{{orderDetail.product.price | currency:'&#8377;'}}</td>
             <td>
               <button (click)="incrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">+</button>
               {{orderDetail.quantity}}
               <button (click)="decrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">-</button>
             </td>
-            <td>{{orderDetail.quantity * orderDetail.product.price}}</td>
+            <td>{{orderDetail.quantity * orderDetail.product.price | currency:'&#8377;'}}</td>
           </tr>
         </tbody>
       </table>
 
       <li class="list-group-item">
         Subtotal
-        <div style="float: right;">Rs. {{subtotal}}</div>
+        <div style="float: right;">{{subtotal | currency:'&#8377;'}}</div>
       </li>
       <li class="list-group-item">
         Tax
-        <div style="float: right;">Rs. {{tax}}</div>
+        <div style="float: right;">{{tax | currency:'&#8377;'}}</div>
       </li>
       <li class="list-group-item">
         Grand Total
-        <div style="float: right;">Rs. {{total}}</div>
+        <div style="float: right;">{{total | currency:'&#8377;'}}</div>
       </li>
     </ul>
 

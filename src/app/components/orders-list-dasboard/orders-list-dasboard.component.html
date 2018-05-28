@@ -11,14 +11,17 @@
     </thead>
 
     <tbody *ngIf="orders && orders.length > 0">
-        <tr *ngFor="let order of orders">
-          <th scope="col">#{{order.id}}</th>
-          <td>{{order.totalAmount}}</td>
-          <td>customerId</td>
-          <td>{{order.orderTime}}</td>
-          <td>{{order.status}}</td>
-        </tr>
-
+      <tr *ngFor="let order of orders">
+        <th scope="col">#{{order.id}}</th>
+        <td>{{order.totalAmount | currency:'&#8377;'}}</td>
+        <td>customerId</td>
+        <td>{{order.orderTime}}</td>
+        <td *ngIf="order.status">Complete</td>
+        <td *ngIf="!order.status">On Hold</td>
+      </tr>
     </tbody>
   </table>
+  <div *ngIf="orders && orders.length == 0" style="text-align: center">
+    <h5>No Orders yet!</h5>
+  </div>
 </div>

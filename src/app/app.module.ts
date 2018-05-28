@@ -30,6 +30,8 @@ import { CashDrawerService } from './services/cash-drawer.service';
 import { OrderService } from './services/order.service';
 import { OrderListItemComponent } from './components/orders-list-dashboard/order-list-item/order-list-item.component';
 import { OrdersListDasboardComponent } from './components/orders-list-dasboard/orders-list-dasboard.component';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuardService } from './services/auth/auth-guard.service';
 
 
 @NgModule({
@@ -58,7 +60,7 @@ import { OrdersListDasboardComponent } from './components/orders-list-dasboard/o
     FormsModule
   ],
   providers: [ProductService, ProductDataService, CustomerService, CartProductDataService,
-    CartCustomerDataService, LoginService, LoginDataService, CashDrawerService, OrderService
+    CartCustomerDataService, LoginService, LoginDataService, CashDrawerService, OrderService, AuthService, AuthGuardService
   ],
 
   bootstrap: [AppComponent]

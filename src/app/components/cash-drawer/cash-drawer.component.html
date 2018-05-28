@@ -1,15 +1,22 @@
 <div>
-  <div class="card p-2 m-2" style="width: 300px;">
-    <div *ngIf="drawer">
-      <h5>Drawer details</h5>
-      <hr>
-      <label>Starting Balance : {{drawer.startingBalance}}</label>
-      <label>Closing Balance : {{drawer.endingBalance}}</label>
+  <div class="row">
+    <div class="col"></div>
+
+    <div class="col card p-3 m-4">
+      <div *ngIf="drawer">
+        <h5>Drawer details</h5>
+        <hr>
+        <label>Starting Balance : {{drawer.startingBalance | currency:'&#8377;'}}</label>
+        <br>
+        <label>Closing Balance : {{drawer.endingBalance | currency:'&#8377;'}}</label>
+      </div>
+      <div *ngIf="!drawer">
+        <input #balanceInput type="text" placeholder="Enter starting balance" class="form-control">
+        <button (click)="setOpeningBalance(balanceInput.value)" class="form-control btn btn-primary">Enter</button>
+      </div>
     </div>
-    <div *ngIf="!drawer">
-    <input #balanceInput type="text" placeholder="Enter starting balance" class="form-control">
-    <button (click)="setOpeningBalance(balanceInput.value)" class="form-control btn btn-primary">Enter</button>
-    </div>
+
+    <div class="col"></div>
   </div>
 
 </div>

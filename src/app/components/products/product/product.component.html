@@ -2,7 +2,7 @@
   <div class="card-body" style="text-align: center;">
     <h5 class="card-title">{{product.name}}</h5>
     <hr>
-    <h6 class="card-title">Rs.{{product.price}}</h6>
+    <h6 class="card-title">{{product.price | currency:'&#8377;'}}</h6>
     <h6 class="card-title">Stock: {{product.stock}}</h6>
     <p class="card-text">{{product.description}}</p>
     <button class="btn btn-primary" (click)="addToCart(product)">Add to cart</button>

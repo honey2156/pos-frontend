@@ -6,6 +6,7 @@ import { CartCustomerDataService } from '../../../services/cart-customer-data.se
 import { CartProductDataService } from '../../../services/cart-product-data.service';
 import { Order } from '../../../models/order';
 import { OrderService } from '../../../services/order.service';
+import { Product } from '../../../models/product';
 
 @Component({
   selector: 'app-cart-dashboard-view',
@@ -108,6 +109,15 @@ export class CartDashboardViewComponent implements OnInit {
     this.maintainTotals()
   }
 
+  resetCart(){
+    this.customer = new Customer()
+    this.orderDetails = []
+    this.subtotal = 0
+    this.togglePaymentOptions = false
+    this.cartProductDataService.updateProductInCart(new Product())
+    this.cartCustomerDataService.changeCustomer(new Customer())
+  }
+
   placeOrder(paymentMode: string) {
     console.log(paymentMode)
     if (paymentMode == '') {
@@ -134,8 +144,9 @@ export class CartDashboardViewComponent implements OnInit {
     this.orderService.placeOrder(order)
       .subscribe((order) => {
         console.log(order)
+        alert("order placed : "+order.id)
       })
-    this.togglePaymentOptions = false
+    this.resetCart()
   }
 
   saveOrder(paymentMode: string) {
@@ -157,7 +168,9 @@ export class CartDashboardViewComponent implements OnInit {
     this.orderService.placeOrder(order)
       .subscribe((order) => {
         console.log(order)
+        alert("order saved : "+order.id)
       })
-    this.togglePaymentOptions = false
+
+    this.resetCart()
   }
 }

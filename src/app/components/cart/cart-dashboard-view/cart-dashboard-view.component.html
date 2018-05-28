@@ -20,9 +20,9 @@
             <td>{{orderDetail.product.name}}</td>
             <td>{{orderDetail.product.price | currency:'&#8377;'}}</td>
             <td>
-              <button (click)="incrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">+</button>
+              <button *ngIf="!togglePaymentOptions" (click)="incrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">+</button>
               {{orderDetail.quantity}}
-              <button (click)="decrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">-</button>
+              <button *ngIf="!togglePaymentOptions" (click)="decrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">-</button>
             </td>
             <td>{{orderDetail.quantity * orderDetail.product.price | currency:'&#8377;'}}</td>
           </tr>

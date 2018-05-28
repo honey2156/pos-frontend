@@ -24,6 +24,7 @@ export class CartDashboardViewComponent implements OnInit {
     { name: "Cash", value: "CASH" },
     { name: "Card", value: "CARD" }
   ]
+  togglePaymentOptions: boolean = false
 
   constructor(
     private cartCustomerDataService: CartCustomerDataService,
@@ -134,18 +135,13 @@ export class CartDashboardViewComponent implements OnInit {
       .subscribe((order) => {
         console.log(order)
       })
+    this.togglePaymentOptions = false
   }
 
   saveOrder(paymentMode: string) {
-    console.log(paymentMode)
-    if (paymentMode == '') {
-      alert('please select payment mode')
-      return
-    }
     let order = new Order()
     order.employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
     order.customerId = this.customer.id
-    // order.paymentMode = paymentMode
     order.status = false
     order.totalAmount = this.total
     let oDetails = []
@@ -156,5 +152,12 @@ export class CartDashboardViewComponent implements OnInit {
         quantity: element.quantity
       })
     });
+    order.orderDetails = oDetails
+
+    this.orderService.placeOrder(order)
+      .subscribe((order) => {
+        console.log(order)
+      })
+    this.togglePaymentOptions = false
   }
 }

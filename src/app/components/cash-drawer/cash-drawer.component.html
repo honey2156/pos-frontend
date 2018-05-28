@@ -6,8 +6,10 @@
       <label>Starting Balance : {{drawer.startingBalance}}</label>
       <label>Closing Balance : {{drawer.endingBalance}}</label>
     </div>
+    <div *ngIf="!drawer">
     <input #balanceInput type="text" placeholder="Enter starting balance" class="form-control">
     <button (click)="setOpeningBalance(balanceInput.value)" class="form-control btn btn-primary">Enter</button>
+    </div>
   </div>
 
 </div>

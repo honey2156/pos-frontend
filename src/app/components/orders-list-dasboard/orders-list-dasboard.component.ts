@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../../services/order.service';
+import { Order } from '../../models/order';
 
 @Component({
   selector: 'app-orders-list-dasboard',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersListDasboardComponent implements OnInit {
 
-  constructor() { }
+  orders: Order[] = []
+
+  constructor(private orderService: OrderService) { }
 
   ngOnInit() {
+    this.getEmployeeOrders()
   }
 
+  getEmployeeOrders() {
+    let employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
+    this.orderService.getEmployeeOrders(employeeId)
+      .subscribe((orders) => {
+        this.orders = orders
+      })
+  }
 }

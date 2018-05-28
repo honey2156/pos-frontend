@@ -17,7 +17,6 @@ import { CartDashboardViewComponent } from './components/cart/cart-dashboard-vie
 import { CustomerService } from './services/customer.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { CheckoutDasboardComponent } from './components/checkout-dasboard/checkout-dasboard.component';
-import { OrdersListDasboardComponent } from './components/orders-list-dasboard/orders-list-dasboard.component';
 import { SaveOrdersDasboardComponent } from './components/save-orders-dasboard/save-orders-dasboard.component';
 import { CashDrawerComponent } from './components/cash-drawer/cash-drawer.component';
 import { ReportComponent } from './components/report/report.component';
@@ -29,6 +28,8 @@ import { LoginService } from './services/login.service';
 import { LoginDataService } from './services/login-data.service';
 import { CashDrawerService } from './services/cash-drawer.service';
 import { OrderService } from './services/order.service';
+import { OrderListItemComponent } from './components/orders-list-dashboard/order-list-item/order-list-item.component';
+import { OrdersListDasboardComponent } from './components/orders-list-dasboard/orders-list-dasboard.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { OrderService } from './services/order.service';
     SaveOrdersDasboardComponent,
     CashDrawerComponent,
     ReportComponent,
-    LoginComponent
+    LoginComponent,
+    OrderListItemComponent
   ],
   imports: [
     BrowserModule,

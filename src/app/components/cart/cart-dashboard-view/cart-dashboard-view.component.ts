@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../../../models/customer';
+import { OrderDetail } from '../../../models/order_detail';
+import { PaymentMode } from '../../../models/payment_mode';
 import { CartCustomerDataService } from '../../../services/cart-customer-data.service';
 import { CartProductDataService } from '../../../services/cart-product-data.service';
-import { OrderDetail } from '../../../models/order_detail';
-import { Product } from '../../../models/product';
 import { Order } from '../../../models/order';
+import { OrderService } from '../../../services/order.service';
 
 @Component({
   selector: 'app-cart-dashboard-view',
@@ -18,10 +19,16 @@ export class CartDashboardViewComponent implements OnInit {
   tax: number = 10
   total: number = 0
   subtotal: number = 0
+  paymentModes: PaymentMode[] = [
+    { name: "Please select mode of payment", value: '' },
+    { name: "Cash", value: "CASH" },
+    { name: "Card", value: "CARD" }
+  ]
 
   constructor(
     private cartCustomerDataService: CartCustomerDataService,
-    private cartProductDataService: CartProductDataService) {
+    private cartProductDataService: CartProductDataService,
+    private orderService: OrderService) {
     this.customer = new Customer()
     this.orderDetails = []
   }
@@ -44,6 +51,7 @@ export class CartDashboardViewComponent implements OnInit {
             orderDetail = new OrderDetail()
             orderDetail.productId = cartProduct.id
             orderDetail.product = cartProduct
+            orderDetail.price = cartProduct.price
             orderDetail.quantity = 0;
             this.orderDetails.push(orderDetail)
           }
@@ -99,4 +107,54 @@ export class CartDashboardViewComponent implements OnInit {
     this.maintainTotals()
   }
 
+  placeOrder(paymentMode: string) {
+    console.log(paymentMode)
+    if (paymentMode == '') {
+      alert('please select payment mode')
+      return
+    }
+    let order = new Order()
+    order.employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
+    order.customerId = this.customer.id
+    order.paymentMode = paymentMode
+    order.status = true
+    order.totalAmount = this.total
+    let oDetails = []
+    this.orderDetails.forEach(element => {
+      oDetails.push({
+        product: element.product,
+        price: element.price,
+        quantity: element.quantity
+      })
+    });
+
+    order.orderDetails = oDetails
+
+    this.orderService.placeOrder(order)
+      .subscribe((order) => {
+        console.log(order)
+      })
+  }
+
+  saveOrder(paymentMode: string) {
+    console.log(paymentMode)
+    if (paymentMode == '') {
+      alert('please select payment mode')
+      return
+    }
+    let order = new Order()
+    order.employeeId = JSON.parse(localStorage.getItem('loggedUser')).id
+    order.customerId = this.customer.id
+    // order.paymentMode = paymentMode
+    order.status = false
+    order.totalAmount = this.total
+    let oDetails = []
+    this.orderDetails.forEach(element => {
+      oDetails.push({
+        product: element.product,
+        price: element.price,
+        quantity: element.quantity
+      })
+    });
+  }
 }

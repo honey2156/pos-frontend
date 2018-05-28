@@ -4,7 +4,7 @@ export class OrderDetail {
     id: number
     orderId: number
     productId: number
-    product:Product
+    product: Product
+    price: number
     quantity: number
-    subtotal: number
 }

@@ -1,14 +1,17 @@
 <div>
   <div class="row">
-    <!-- <div class="col"></div> -->
 
-    <div class="col-5 card p-4">
-      <div *ngIf="drawer">
-        <h5>Drawer details</h5>
+    <div class="col-4 card p-4">
+      <div *ngIf="drawer" style="text-align: center">
+        <h4>Drawer details</h4>
         <hr>
-        <label>Starting Balance : {{drawer.startingBalance | currency:'&#8377;'}}</label>
+        <label>Starting Balance :
+          <b>{{drawer.startingBalance | currency:'&#8377;'}}</b>
+        </label>
         <br>
-        <label>Closing Balance : {{drawer.endingBalance | currency:'&#8377;'}}</label>
+        <label>Closing Balance :
+          <b>{{drawer.endingBalance | currency:'&#8377;'}}</b>
+        </label>
       </div>
       <div *ngIf="!drawer">
         <input #balanceInput type="text" placeholder="Enter starting balance" class="form-control">
@@ -16,13 +19,16 @@
       </div>
     </div>
 
-    <div class="col-7" style="overflow-y: auto; max-height: 900px;">
+    <div class="col-8" style="overflow-y: auto; max-height: 900px;">
+      <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Drawer Summary</span>
+      </nav>
       <div class="card" *ngFor="let gOrder of groupedOrders">
         <div class="card-header">
           <div class="row">
             <div class="col">{{gOrder.orderDate}}</div>
-            <div class="col">{{gOrder.startingBalance | currency:'&#8377;'}}</div>
-            <div class="col">{{gOrder.endingBalance | currency:'&#8377;'}}</div>
+            <div class="col">Starting balance : {{gOrder.startingBalance | currency:'&#8377;'}}</div>
+            <div class="col">Closing Balance : {{gOrder.endingBalance | currency:'&#8377;'}}</div>
           </div>
         </div>
         <ul class="list-group list-group-flush">

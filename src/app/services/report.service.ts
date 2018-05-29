@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Report } from '../models/report';
 import { CashDrawerService } from './cash-drawer.service';
 import { OrderService } from './order.service';
-import { CashDrawer } from '../models/cash_drawer';
-import { Order } from '../models/order';
+import { Employee } from '../models/employee';
 
 @Injectable()
 export class ReportService {
 
-  drawer: CashDrawer
+  loggedUser: Employee
   employeeId: number
-  groupedOrders = []
   reportOrders = []
-  reports: Report[]
 
 
   constructor(
@@ -21,8 +17,9 @@ export class ReportService {
     private orderService: OrderService) { }
 
 
-  generateAndDownloadReport(employeeId: number) {
-    this.employeeId = employeeId
+  generateAndDownloadReport(user: Employee) {
+    this.loggedUser = user
+    this.employeeId = this.loggedUser.id
     this.setReport()
   }
 
@@ -34,7 +31,7 @@ export class ReportService {
     var blob = new Blob([csvData], { type: 'text/csv' });
     var url = window.URL.createObjectURL(blob);
     a.href = url;
-    a.download = 'Report.csv';
+    a.download = this.loggedUser.name + '_report.csv';
     a.click();
   }
 
@@ -102,7 +99,8 @@ export class ReportService {
   createReportRecord(element): Report {
     let obj = new Report()
     obj.Date = element.orderDate
-    obj.orders = element.allOrders.length
+    obj.orders = element.orders.length
+    obj.savedOrders = element.allOrders.filter(o => o.status === false).length
     let cardPayments = 0, cashPayments = 0, totalSales = 0, totalCashPayments = 0, totalCardPayments = 0
     for (let order of element.orders) {
       if (order.paymentMode === "CASH") {

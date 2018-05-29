@@ -51,6 +51,6 @@ export class NavbarComponent implements OnInit {
   }
 
   downloadReport() {
-    this.reportService.generateAndDownloadReport(this.loggedUser.id)
+    this.reportService.generateAndDownloadReport(this.loggedUser)
   }
 }

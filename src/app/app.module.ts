@@ -17,8 +17,8 @@ import { ProductDashboardViewComponent } from './components/products/product-das
 import { ProductComponent } from './components/products/product/product.component';
 import { ProductsDashboardNavComponent } from './components/products/products-dashboard-nav/products-dashboard-nav.component';
 import { ProductsDashboardComponent } from './components/products/products-dashboard/products-dashboard.component';
-import { ReportComponent } from './components/report/report.component';
 import { SaveOrdersDasboardComponent } from './components/save-orders-dasboard/save-orders-dasboard.component';
+import { SavedOrdersDetailComponent } from './components/saved-orders-detail/saved-orders-detail.component';
 import { AuthGuardService } from './services/auth/auth-guard.service';
 import { AuthService } from './services/auth/auth.service';
 import { CartCustomerDataService } from './services/cart-customer-data.service';
@@ -31,7 +31,6 @@ import { OrderService } from './services/order.service';
 import { ProductDataService } from './services/product-data.service';
 import { ProductService } from './services/product.service';
 import { ReloadCartService } from './services/reload-cart.service';
-import { SavedOrdersDetailComponent } from './components/saved-orders-detail/saved-orders-detail.component';
 import { ReportService } from './services/report.service';
 
 
@@ -52,7 +51,6 @@ import { ReportService } from './services/report.service';
     OrdersListDasboardComponent,
     SaveOrdersDasboardComponent,
     CashDrawerComponent,
-    ReportComponent,
     LoginComponent,
     OrdersListDetailComponent,
     SavedOrdersDetailComponent

@@ -29,7 +29,41 @@
       </ul>
       <!-- <button *ngIf="!loggedUser.id" routerLink="/login" class="btn btn-secondary">Login</button> -->
       <button *ngIf="loggedUser.id" (click)="downloadReport()" class="btn btn-outline-light">Report</button>
-      <button *ngIf="loggedUser.id" (click)="logout()" class="btn btn-outline-light ml-2">logout</button>
+      <button *ngIf="loggedUser.id" (click)="confirmDrawer()" class="btn btn-outline-light ml-2" data-toggle="modal" data-target="#confirmDrawerModal">logout</button>
     </div>
   </div>
 </nav>
+
+<!-- The Modal -->
+<div class="modal" id="confirmDrawerModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Cashdrawer</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label>Starting Balance :
+          <b>{{drawer.startingBalance | currency:'&#8377;'}}</b>
+        </label>
+        <br>
+        <label>Closing Balance :
+          <b>{{drawer.endingBalance | currency:'&#8377;'}}</b>
+        </label>
+        <hr>
+        <p>Confirm to Logout!</p>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+          <button type="button" (click)="logout()" class="btn btn-outline-primary" data-dismiss="modal">Confirm</button>
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

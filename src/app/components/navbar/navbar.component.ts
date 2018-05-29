@@ -4,6 +4,8 @@ import { Employee } from '../../models/employee';
 import { Report } from '../../models/report';
 import { LoginDataService } from '../../services/login-data.service';
 import { ReportService } from '../../services/report.service';
+import { CashDrawer } from '../../models/cash_drawer';
+import { CashDrawerService } from '../../services/cash-drawer.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,11 +16,14 @@ export class NavbarComponent implements OnInit {
 
   loggedUser: Employee
   reports: Report[] = []
+  drawer: CashDrawer = new CashDrawer()
+
 
   constructor(
     private loginDataService: LoginDataService,
     private route: Router,
-    private reportService: ReportService) {
+    private reportService: ReportService,
+    private cashDrawerService: CashDrawerService) {
     this.loggedUser = this.getLoginStatus()
   }
 
@@ -42,6 +47,17 @@ export class NavbarComponent implements OnInit {
     else {
       return new Employee()
     }
+  }
+
+  confirmDrawer() {
+    this.getCashDrawer()
+  }
+
+  getCashDrawer() {
+    this.cashDrawerService.getEmployeeDrawer(this.loggedUser.id)
+      .subscribe(drawer => {
+        this.drawer = drawer
+      })
   }
 
   logout() {

@@ -1,31 +1,36 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Master View -->
-    <div class="col">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Total</th>
-            <th scope="col">Customer</th>
-            <th scope="col">Order At</th>
-          </tr>
-        </thead>
-
-        <tbody *ngIf="orders && orders.length > 0">
-          <tr *ngFor="let order of orders" (click)="displayOrderDetails(order)">
-            <th scope="col">#{{order.id}}</th>
-            <td>{{order.totalAmount | currency:'&#8377;'}}</td>
-            <td>{{order.customer.name}}</td>
-            <td>{{order.orderDate}} {{order.orderTime}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div *ngIf="orders && orders.length == 0" style="text-align: center">
-        <h5>No Orders yet!</h5>
+    <div class="col" style="overflow-y: auto; max-height: 1000px;">
+        <div class="card" *ngFor="let gOrder of groupedOrders">
+          <div class="card-header">
+            {{gOrder.orderDate}}
+          </div>
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let order of gOrder.orders" (click)="displayOrderDetails(order)" class="list-group-item list-group-item-action list-group-item-secondary">
+              <div class="row">
+                <div class="col">
+                  <b>#{{order.id}}</b>
+                </div>
+                <div class="col">
+                  {{order.totalAmount | currency:'&#8377;'}}
+                </div>
+                <div class="col">
+                  {{order.customer.name}}
+                </div>
+                <div class="col">
+                  {{order.orderTime}}
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+  
+        <div *ngIf="orders && orders.length == 0" style="text-align: center">
+          <h5>No Orders yet!</h5>
+        </div>
       </div>
-    </div>
-
+  
     <!-- detail view-->
     <div class="col">
       <app-saved-orders-detail [order]="orderView" [orderDetail]="orderView.orderDetails"></app-saved-orders-detail>

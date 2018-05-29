@@ -10,6 +10,7 @@ import { OrderService } from '../../services/order.service';
 export class SaveOrdersDasboardComponent implements OnInit {
 
   orders: Order[] = []
+  groupedOrders = []
   orderView: Order = new Order()
 
 
@@ -25,13 +26,28 @@ export class SaveOrdersDasboardComponent implements OnInit {
       .subscribe((orders) => {
         orders = orders.filter(order => order.status === false)
         this.orders = orders
+        this.groupOrders()
       })
   }
 
-  // reloadOrder(order: Order) {
-  //   this.reloadCartService.updateOrder(order)
-  //   this.router.navigate(['checkout'])
-  // }
+  groupOrders() {
+    let i: number
+    let n = this.orders.length
+    for (i = 0; i < n; i++) {
+      let date = this.orders[i].orderDate
+      let j: number = i
+      let dateOrders: Order[] = []
+      for (j; j < n && this.orders[j].orderDate === date; j++) {
+        dateOrders.push(this.orders[j])
+        // console.log(i + ' ' + this.orders[j].orderDate)
+      }
+      i = j
+      this.groupedOrders.push({
+        orderDate: date,
+        orders: dateOrders
+      })
+    }
+  }
 
   displayOrderDetails(order) {
     this.orderView = order

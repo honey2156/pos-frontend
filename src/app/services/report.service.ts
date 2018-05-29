@@ -62,12 +62,10 @@ export class ReportService {
   }
 
   getTransactions() {
-    console.log('getTransactions')
     this.orderService.getEmployeeAlldrawers(this.employeeId)
       .subscribe((employeeDrawers) => {
         let arr = [];
         for (let drawer of employeeDrawers) {
-          // /  let orderPromise:
           arr.push(new Promise((resolve, reject) => {
             this.orderService.getDrawerOrders(drawer.id)
               .subscribe((orders) => {
@@ -78,19 +76,18 @@ export class ReportService {
                   orders: orders.filter(o => o.status === true),
                   allOrders: orders
                 }
-                console.log(obj.orders)
                 this.reportOrders.push(obj)
                 resolve(true);
               })
           }))
         }
-        Promise.all(arr).then(res => {
-          console.log(res)
-          this.generateReportFromOrders();
-        }).catch(err => {
-          console.log(err);
-        })
-
+        Promise.all(arr)
+          .then(res => {
+            this.generateReportFromOrders();
+          })
+          .catch(err => {
+            console.log(err);
+          })
       })
   }
 

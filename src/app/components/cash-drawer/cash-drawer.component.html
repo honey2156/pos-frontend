@@ -1,8 +1,8 @@
 <div>
   <div class="row">
-    <div class="col"></div>
+    <!-- <div class="col"></div> -->
 
-    <div class="col card p-3 m-4">
+    <div class="col-5 card p-4">
       <div *ngIf="drawer">
         <h5>Drawer details</h5>
         <hr>
@@ -16,7 +16,38 @@
       </div>
     </div>
 
-    <div class="col"></div>
-  </div>
+    <div class="col-7" style="overflow-y: auto; max-height: 900px;">
+      <div class="card" *ngFor="let gOrder of groupedOrders">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">{{gOrder.orderDate}}</div>
+            <div class="col">{{gOrder.startingBalance | currency:'&#8377;'}}</div>
+            <div class="col">{{gOrder.endingBalance | currency:'&#8377;'}}</div>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let order of gOrder.orders" class="list-group-item list-group-item-action list-group-item-secondary">
+            <div class="row">
+              <div class="col">
+                <b>#{{order.id}}</b>
+              </div>
+              <div class="col">
+                {{order.totalAmount | currency:'&#8377;'}}
+              </div>
+              <div class="col">
+                {{order.customer.name}}
+              </div>
+              <div class="col">
+                {{order.orderTime}}
+              </div>
+            </div>
+            <div *ngIf="orders && orders.length == 0" style="text-align: center">
+              <h5>No Transactions on this day!</h5>
+            </div>
+          </li>
+        </ul>
+      </div>
 
-</div>
+    </div>
+
+  </div>

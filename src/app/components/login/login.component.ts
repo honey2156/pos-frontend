@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           alert('logged successfully')
           localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser))
           this.loginDataService.updateLoggedUser(this.loggedUser)
-          this.route.navigate(['checkout'])
+          this.route.navigate(['cash-drawer'])
         }
         else {
           alert('invalid login credentials')

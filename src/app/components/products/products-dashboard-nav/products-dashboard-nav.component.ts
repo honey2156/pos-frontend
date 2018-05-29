@@ -3,6 +3,7 @@ import { ProductService } from '../../../services/product.service';
 import { ProductDataService } from '../../../services/product-data.service';
 import { Product } from '../../../models/product';
 
+
 @Component({
   selector: 'app-products-dashboard-nav',
   templateUrl: './products-dashboard-nav.component.html',

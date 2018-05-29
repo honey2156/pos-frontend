@@ -2,7 +2,7 @@
   <a class="navbar-brand">Cart</a>
   <div class="form-inline">
     <div class="input-group">
-      <input #customerSearchInput class="form-control" placeholder="Search customer">
+      <input #customerSearchInput (keyup)="searchCustomers(customerSearchInput.value)" class="form-control" placeholder="Search customer">
       <div class="input-group-append">
         <button (click)="searchCustomers(customerSearchInput.value);customerSearchInput.value=''" class="btn btn-outline-secondary"
           type="button">Search</button>
@@ -11,10 +11,10 @@
   </div>
 </nav>
 
-<div class="container mt-3 mb-3" *ngIf="customers.length > 0">
+<div class="container mt-3 mb-3" *ngIf="customers$ | async">
   <div class="card p-1" style="overflow-y: auto;max-height: 150px;">
     <ul class="list-group-item">
-      <li *ngFor="let customer of customers" class="list-group-item" (click)="selectCustomerCart(customer)" >
+      <li *ngFor="let customer of customers$ | async" class="list-group-item" (click)="selectCustomerCart(customer);customerSearchInput.value=''" >
         {{customer.name}}
         <div style="float: right;">{{customer.email}}</div>
       </li>

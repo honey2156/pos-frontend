@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light mb-3">
   <a class="navbar-brand">Products</a>
   <div class="form-inline">
-    <input #productSearchInput class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <input #productSearchInput (keyup)="searchProducts(productSearchInput.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button (click)="searchProducts(productSearchInput.value);productSearchInput.value=''" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
   </div>
 </nav>

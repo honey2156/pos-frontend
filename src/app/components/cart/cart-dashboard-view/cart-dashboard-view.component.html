@@ -59,11 +59,52 @@
       </div>
 
       <div class="form-inline">
-        <button *ngIf="!disableButtons" class="btn btn-secondary m-2" (click)="saveOrder(paymentMode.value)">Save Order</button>
-        <button class="btn btn-primary m-2" (click)="placeOrder(paymentMode.value)">Place Order</button>
+        <button *ngIf="!disableButtons" class="btn btn-secondary m-2" (click)="saveOrder(paymentMode.value)" data-toggle="modal" data-target="#saveOrderModal">Save Order</button>
+        <button class="btn btn-primary m-2" (click)="placeOrder(paymentMode.value)" data-toggle="modal" data-target="#placeOrderModal" >Place Order</button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- Modal for place order -->
+  <div class="modal" id="placeOrderModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h3>{{placedOrder.totalAmount | currency:'&#8377;' }}</h3>
+          <h6>Order has been created successfully</h6>
+          <h6>Order Id : #{{placedOrder.id}}</h6>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
       </div>
     </div>
   </div>
 
+  
+  <!-- Modal for save order -->
+  <div class="modal" id="saveOrderModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+            <h3>{{savedOrder.totalAmount | currency:'&#8377;' }}</h3>
+            <h6>Order has been saved successfully</h6>
+          </div>
+    
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+    
+        </div>
+      </div>
+    </div>
 
 </div>

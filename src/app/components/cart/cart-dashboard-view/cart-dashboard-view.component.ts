@@ -29,6 +29,8 @@ export class CartDashboardViewComponent implements OnInit {
     { name: "Card", value: "CARD" }
   ]
   togglePaymentOptions: boolean = false
+  placedOrder:Order = new Order()
+  savedOrder:Order = new Order()
 
   constructor(
     private cartCustomerDataService: CartCustomerDataService,
@@ -153,7 +155,7 @@ export class CartDashboardViewComponent implements OnInit {
     this.orderService.placeOrder(order)
       .subscribe((order) => {
         console.log(order)
-        alert("order placed : " + order.id)
+        this.placedOrder = order
       })
     this.resetCart()
   }
@@ -163,7 +165,7 @@ export class CartDashboardViewComponent implements OnInit {
     this.orderService.placeOrder(order)
       .subscribe((order) => {
         console.log(order)
-        alert("order saved : " + order.id)
+        this.savedOrder = order
       })
 
     this.resetCart()

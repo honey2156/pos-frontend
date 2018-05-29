@@ -100,12 +100,11 @@ export class ReportService {
   }
 
   createReportRecord(element): Report {
-    console.log('createReportRecord' + element.orderDate + ' ' + element.allOrders.length)
     let obj = new Report()
     obj.Date = element.orderDate
     obj.orders = element.allOrders.length
     let cardPayments = 0, cashPayments = 0, totalSales = 0, totalCashPayments = 0, totalCardPayments = 0
-    for (let order of element.allOrders) {
+    for (let order of element.orders) {
       if (order.paymentMode === "CASH") {
         cashPayments++
         totalCashPayments += order.totalAmount
@@ -125,8 +124,6 @@ export class ReportService {
   }
 
   setReport() {
-    console.log('setReport')
-    // this.generateReportFromOrders()
     this.getTransactions()
   }
 

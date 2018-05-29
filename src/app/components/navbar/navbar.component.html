@@ -31,6 +31,7 @@
         <li class="nav-item" style="color: white">{{loggedUser.name}}</li>
       </ul>
       <!-- <button *ngIf="!loggedUser.id" routerLink="/login" class="btn btn-secondary">Login</button> -->
+      <button *ngIf="loggedUser.id" (click)="downloadReport()" class="btn btn-outline-light">Report</button>
       <button *ngIf="loggedUser.id" (click)="logout()" class="btn btn-outline-light">logout</button>
     </div>
   </div>

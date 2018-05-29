@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CashDrawer } from '../../models/cash_drawer';
 import { CashDrawerService } from '../../services/cash-drawer.service';
 import { OrderService } from '../../services/order.service';
-import { Order } from '../../models/order';
+import { ReportService } from '../../services/report.service';
 
 @Component({
   selector: 'app-cash-drawer',
@@ -17,7 +17,8 @@ export class CashDrawerComponent implements OnInit {
 
   constructor(
     private cashDrawerService: CashDrawerService,
-    private orderService: OrderService) {
+    private orderService: OrderService,
+    private reportService: ReportService) {
     this.drawer = new CashDrawer()
   }
 
@@ -54,6 +55,7 @@ export class CashDrawerComponent implements OnInit {
       })
   }
 
+
   setOpeningBalance(startingBalance: number) {
     this.cashDrawerService.setOpeningDrawer(this.employeeId, { startingBalance } as CashDrawer)
       .subscribe((data) => {
@@ -62,22 +64,4 @@ export class CashDrawerComponent implements OnInit {
       })
   }
 
-  // groupOrders(orders) {
-  //   let i: number
-  //   let n = orders.length
-  //   for (i = 0; i < n; i++) {
-  //     let date = orders[i].orderDate
-  //     let j: number = i
-  //     let dateOrders: Order[] = []
-  //     for (j; j < n && orders[j].orderDate === date; j++) {
-  //       dateOrders.push(orders[j])
-  //       // console.log(i + ' ' + this.orders[j].orderDate)
-  //     }
-  //     i = j
-  //     this.groupedOrders.push({
-  //       orderDate: date,
-  //       orders: dateOrders
-  //     })
-  //   }
-  // }
 }

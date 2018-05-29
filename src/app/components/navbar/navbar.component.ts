@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Employee } from '../../models/employee';
-import { LoginDataService } from '../../services/login-data.service';
 import { Router } from '@angular/router';
+import { Employee } from '../../models/employee';
+import { Report } from '../../models/report';
+import { LoginDataService } from '../../services/login-data.service';
+import { ReportService } from '../../services/report.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +13,12 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   loggedUser: Employee
+  reports: Report[] = []
 
-  constructor(private loginDataService: LoginDataService, private route: Router) {
+  constructor(
+    private loginDataService: LoginDataService,
+    private route: Router,
+    private reportService: ReportService) {
     this.loggedUser = this.getLoginStatus()
   }
 
@@ -42,5 +48,9 @@ export class NavbarComponent implements OnInit {
     this.loggedUser = new Employee()
     localStorage.clear()
     this.route.navigate(['login'])
+  }
+
+  downloadReport() {
+    this.reportService.generateAndDownloadReport(this.loggedUser.id)
   }
 }

@@ -32,6 +32,7 @@ import { ProductDataService } from './services/product-data.service';
 import { ProductService } from './services/product.service';
 import { ReloadCartService } from './services/reload-cart.service';
 import { SavedOrdersDetailComponent } from './components/saved-orders-detail/saved-orders-detail.component';
+import { ReportService } from './services/report.service';
 
 
 
@@ -64,7 +65,7 @@ import { SavedOrdersDetailComponent } from './components/saved-orders-detail/sav
   ],
   providers: [ProductService, ProductDataService, CustomerService, CartProductDataService,
     CartCustomerDataService, LoginService, LoginDataService, CashDrawerService, OrderService,
-    AuthService, AuthGuardService, ReloadCartService
+    AuthService, AuthGuardService, ReloadCartService, ReportService
   ],
 
   bootstrap: [AppComponent]

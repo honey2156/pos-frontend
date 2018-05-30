@@ -29,8 +29,10 @@ export class CartDashboardViewComponent implements OnInit {
     { name: "Card", value: "CARD" }
   ]
   togglePaymentOptions: boolean = false
-  placedOrder:Order = new Order()
-  savedOrder:Order = new Order()
+  placedOrder: Order = new Order()
+  savedOrder: Order = new Order()
+  isPaymentModeSelected = false
+  isCustomerSelected = true
 
   constructor(
     private cartCustomerDataService: CartCustomerDataService,
@@ -61,7 +63,7 @@ export class CartDashboardViewComponent implements OnInit {
       .subscribe((cartProduct) => {
         if (cartProduct && cartProduct.id) {
           if (this.customer.id === undefined) {
-            alert("select customer first")
+            this.isCustomerSelected = false
             return
           }
           let orderDetail = this.orderDetails.find((p) => p.productId === cartProduct.id)
@@ -138,10 +140,6 @@ export class CartDashboardViewComponent implements OnInit {
   }
 
   placeOrder(paymentMode: string) {
-    if (paymentMode == '') {
-      alert('please select payment mode')
-      return
-    }
     let order: Order
     if (this.reloadedOrder && this.reloadedOrder.id) {
       order = this.reloadedOrder
@@ -188,5 +186,9 @@ export class CartDashboardViewComponent implements OnInit {
 
     order.orderDetails = oDetails
     return order
+  }
+
+  selectedPaymentMode(mode: string) {
+    this.isPaymentModeSelected = mode !== ''
   }
 }

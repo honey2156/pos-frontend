@@ -1,13 +1,25 @@
 <div class="container" style="height: 100%;">
   <div class="card p-2" style="min-height: 600px;">
+
+    <div *ngIf="!isCustomerSelected" class="alert alert-danger alert-dismissible fade show" role="alert">
+      No Customer selected. Please select customer first!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
     <div *ngIf="customer.id !== undefined" class="pl-3 m-2">
       <span>
         <i class="fa fa-user prefix"></i>
         <strong> {{customer.name}}</strong>
       </span>
       <div style="float: right;">
-        <button (click)="clearCart()" class="btn btn-outline-danger btn-sm">clear</button>
-        <button (click)="resetCart()" class="btn btn-outline-danger btn-sm">cancel</button>
+        <button (click)="clearCart()" data-toggle="tooltip" title="Clear" class="btn btn-outline-dark btn-sm">
+          <i class="fa fa-ban" aria-hidden="true"></i>
+        </button>
+        <button (click)="resetCart()" data-toggle="tooltip" title="Cancel" class="btn btn-outline-dark btn-sm">
+          <i class="fa fa-window-close" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
     <ul class="list-group">
@@ -49,14 +61,15 @@
       </li>
     </ul>
 
-    <button class="btn btn-primary form-control" style="margin-top: 100px;" *ngIf="!togglePaymentOptions" (click)="togglePaymentOptions=true">Checkout</button>
+    <button [disabled]="!orderDetails || orderDetails.length == 0" class="btn btn-primary form-control" style="margin-top: 100px;"
+      *ngIf="!togglePaymentOptions" (click)="togglePaymentOptions=true">Checkout</button>
 
 
     <!-- To be displayed on click on checkout -->
     <div class="card p-2 m-2" *ngIf="togglePaymentOptions">
       <div class="form-inline">
         Payment Mode :
-        <select class="form-control" #paymentMode>
+        <select class="form-control" #paymentMode (click)="selectedPaymentMode(paymentMode.value)">
           <option *ngFor="let mode of paymentModes" [value]="mode.value">{{mode.name}}</option>
         </select>
       </div>
@@ -64,7 +77,8 @@
       <div class="form-inline">
         <button *ngIf="!disableButtons" class="btn btn-secondary m-2" (click)="saveOrder(paymentMode.value)" data-toggle="modal"
           data-target="#saveOrderModal">Save Order</button>
-        <button class="btn btn-primary m-2" (click)="placeOrder(paymentMode.value)" data-toggle="modal" data-target="#placeOrderModal">Place Order</button>
+        <button [disabled]="!isPaymentModeSelected" class="btn btn-primary m-2" (click)="placeOrder(paymentMode.value)" data-toggle="modal"
+          data-target="#placeOrderModal">Place Order</button>
       </div>
     </div>
   </div>

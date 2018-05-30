@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Customer } from '../models/customer';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of'
+import { catchError } from 'rxjs/operators';
+import { PosErrorHandler } from '../models/error_handler';
 
 @Injectable()
 export class CustomerService {
@@ -16,5 +18,8 @@ export class CustomerService {
       return of([])
     }
     return this.http.get<Customer[]>(this.URL + `${searchPattern}`)
+      .pipe(
+        catchError(PosErrorHandler.handleError<Customer[]>('searchCustomers', []))
+      )
   }
 }

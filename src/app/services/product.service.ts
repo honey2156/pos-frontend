@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of'
 import { Product } from '../models/product';
+import { catchError } from 'rxjs/operators';
+import { PosErrorHandler } from '../models/error_handler';
 
 @Injectable()
 export class ProductService {
@@ -20,5 +22,8 @@ export class ProductService {
       return this.getAllProducts()
     }
     return this.http.get<Product[]>(this.URL + `products/${searchPattern}`)
+      .pipe(
+        catchError(PosErrorHandler.handleError<Product[]>('searchProducts', []))
+      )
   }
 }

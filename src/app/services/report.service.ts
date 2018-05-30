@@ -94,6 +94,7 @@ export class ReportService {
       reports.push(this.createReportRecord(element))
     });
     this.downloadCSVFile(reports)
+    this.reportOrders = []
   }
 
   createReportRecord(element): Report {

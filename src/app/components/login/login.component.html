@@ -9,7 +9,12 @@
       </div>
 
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-group">
-        <input type="text" formControlName="username" class="form-control m-2" placeholder="username">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user prefix"></i></span>
+          </div>
+          <input type="text" formControlName="username" class="form-control " placeholder="username">
+        </div>
 
         <div *ngIf="loginForm.controls.username.invalid && (loginForm.controls.username.dirty || loginForm.controls.username.touched)"
           class="alert alert-warning">
@@ -18,7 +23,12 @@
           </div>
         </div>
 
-        <input type="password" formControlName="password" class="form-control m-2" placeholder="password">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key prefix"></i></span>
+          </div>
+          <input type="password" formControlName="password" class="form-control" placeholder="password">
+        </div>
 
         <div *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)"
           class="alert alert-warning">
@@ -26,8 +36,9 @@
             password is required.
           </div>
         </div>
-
+     
         <input type="submit" value="Login" [disabled]="loginForm.invalid" class="form-control m-2 btn btn-primary">
+     
       </form>
 
       <div *ngIf="!isUserValid" class="alert alert-danger alert-dismissible fade show" role="alert">

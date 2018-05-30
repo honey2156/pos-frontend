@@ -26,6 +26,7 @@ export class ProductsDashboardNavComponent implements OnInit {
   getAllProducts() {
     this.productService.getAllProducts()
       .subscribe((products) => {
+        products = products.filter(p => p.stock > 0)
         this.updateProducts(products)
       })
   }
@@ -33,6 +34,7 @@ export class ProductsDashboardNavComponent implements OnInit {
   searchProducts(searchPattern: string) {
     this.productService.searchProducts(searchPattern)
       .subscribe((products) => {
+        products = products.filter(p => p.stock > 0)
         this.updateProducts(products)
       })
   }

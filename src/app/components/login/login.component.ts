@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Employee } from '../../models/employee';
 import { LoginDataService } from '../../services/login-data.service';
@@ -13,6 +13,11 @@ import { LoginService } from '../../services/login.service';
 export class LoginComponent implements OnInit {
 
   loggedUser: Employee
+  loginForm: FormGroup = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required)
+  })
+  isUserValid = true
 
   constructor(
     private loginService: LoginService,
@@ -22,21 +27,21 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  login(userLogin: NgForm) {
+  login() {
     let employee = new Employee()
-    employee.username = userLogin.value.username
-    employee.password = userLogin.value.password
+    employee.username = this.loginForm.get('username').value
+    employee.password = this.loginForm.get('password').value
     this.loginService.login(employee)
       .subscribe(employee => {
         if (employee && employee.id) {
           this.loggedUser = employee
-          alert('logged successfully')
+          alert('loggedin successfully')
           localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser))
           this.loginDataService.updateLoggedUser(this.loggedUser)
           this.route.navigate(['cash-drawer'])
         }
         else {
-          alert('invalid login credentials')
+          this.isUserValid = false
         }
       })
   }

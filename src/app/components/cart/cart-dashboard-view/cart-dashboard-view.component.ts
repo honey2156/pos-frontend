@@ -33,6 +33,7 @@ export class CartDashboardViewComponent implements OnInit {
   savedOrder: Order = new Order()
   isPaymentModeSelected = false
   isCustomerSelected = true
+  isProductStockLimitReached = false
 
   constructor(
     private cartCustomerDataService: CartCustomerDataService,
@@ -80,7 +81,8 @@ export class CartDashboardViewComponent implements OnInit {
             this.orderDetails = this.orderDetails.filter((cartProduct) => cartProduct.quantity > 0)
           }
           else {
-            alert('product stock limit reached')
+            this.isProductStockLimitReached = true
+            return
           }
         }
         this.maintainTotals()
@@ -94,7 +96,8 @@ export class CartDashboardViewComponent implements OnInit {
       this.orderDetails = this.orderDetails.filter((cartProduct) => cartProduct.quantity > 0)
     }
     else {
-      alert('product stock limit reached')
+      this.isProductStockLimitReached = true
+      return
     }
     this.maintainTotals()
   }

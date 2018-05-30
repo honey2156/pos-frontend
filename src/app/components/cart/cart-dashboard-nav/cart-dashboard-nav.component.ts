@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../../../models/customer';
-import { CustomerService } from '../../../services/customer.service';
-import { CartCustomerDataService } from '../../../services/cart-customer-data.service';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import {
-  debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Customer } from '../../../models/customer';
+import { CartCustomerDataService } from '../../../services/cart-customer-data.service';
+import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-cart-dashboard-nav',
@@ -46,6 +43,10 @@ export class CartDashboardNavComponent implements OnInit {
 
   selectCustomerCart(customer: Customer) {
     this.cartCustomerDataService.changeCustomer(customer)
+    this.clearCustomers()
+  }
+
+  clearCustomers(){
     this.updateCustomers(null)
   }
 

@@ -5,6 +5,6 @@
     <h6 class="card-title">{{product.price | currency:'&#8377;'}}</h6>
     <h6 class="card-title">Stock: {{product.stock}}</h6>
     <p class="card-text">{{product.description}}</p>
-    <button class="btn btn-primary" (click)="addToCart(product)">Add to cart</button>
+    <button class="btn btn-outline-primary form-control" (click)="addToCart(product)">Add <i class="fa fa-cart-plus" aria-hidden="true"></i></button>
   </div>
 </div>

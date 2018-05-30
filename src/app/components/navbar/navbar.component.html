@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#" routerLink="/checkout">POS
+      <a class="navbar-brand" href="#" routerLink="/checkout"><i class="fa fa-shopping-cart" aria-hidden="true"></i> POS
         <i>Solutions</i>
       </a>
     </div>
@@ -25,11 +25,13 @@
         </li>
       </ul>
       <ul class="navbar nav">
-        <li class="nav-item" style="color: white">{{loggedUser.name}}</li>
+        <li class="nav-item" style="color: white">{{loggedUser.name}}
+          <i class="fa fa-user-circle" aria-hidden="true"></i>
+        </li>
       </ul>
       <!-- <button *ngIf="!loggedUser.id" routerLink="/login" class="btn btn-secondary">Login</button> -->
-      <button *ngIf="loggedUser.id" (click)="downloadReport()" class="btn btn-outline-light">Report</button>
-      <button *ngIf="loggedUser.id" (click)="confirmDrawer()" class="btn btn-outline-light ml-2" data-toggle="modal" data-target="#confirmDrawerModal">logout</button>
+      <button *ngIf="loggedUser.id" (click)="downloadReport()" class="btn btn-outline-light btn-sm" title="Report" data-toggle="tooltip"><i class="fa fa-list-alt" aria-hidden="true"></i></button>
+      <button *ngIf="loggedUser.id" (click)="confirmDrawer()" class="btn btn-outline-light btn-sm ml-2" data-toggle="modal" data-target="#confirmDrawerModal">logout</button>
     </div>
   </div>
 </nav>
@@ -60,7 +62,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-          <button type="button" (click)="logout()" class="btn btn-outline-primary" data-dismiss="modal">Confirm</button>
+        <button type="button" (click)="logout()" class="btn btn-outline-primary" data-dismiss="modal">Confirm</button>
         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
       </div>
 

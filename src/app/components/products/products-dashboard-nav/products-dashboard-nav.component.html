@@ -1,7 +1,20 @@
 <nav class="navbar navbar-light bg-light mb-3">
   <a class="navbar-brand">Products</a>
   <div class="form-inline">
-    <input #productSearchInput (keyup)="searchProducts(productSearchInput.value)" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button (click)="searchProducts(productSearchInput.value);productSearchInput.value=''" class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </div>
+      <input #productSearchInput (keyup)="searchProducts(productSearchInput.value)" class="form-control" type="search" placeholder="Search products"
+        aria-label="Search">
+      <div class="input-group-append">
+        <button (click)="searchProducts(productSearchInput.value);productSearchInput.value=''" class="btn btn-outline-secondary"
+          type="button">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
   </div>
 </nav>

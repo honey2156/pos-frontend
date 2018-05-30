@@ -7,7 +7,7 @@
             {{gOrder.orderDate}}
           </div>
           <ul class="list-group list-group-flush">
-            <li *ngFor="let order of gOrder.orders" (click)="displayOrderDetails(order)" class="list-group-item list-group-item-action list-group-item-secondary">
+            <li *ngFor="let order of gOrder.orders" (click)="displayOrderDetails(order)" class="list-group-item list-group-item-action list-group-item-secondary" data-toggle="tooltip" title="click for order details">
               <div class="row">
                 <div class="col">
                   <b>#{{order.id}}</b>

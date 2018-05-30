@@ -7,7 +7,7 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    
+
     <div *ngIf="customer.id !== undefined" class="pl-3 m-2">
       <span>
         <i class="fa fa-user prefix"></i>
@@ -22,6 +22,14 @@
         </button>
       </div>
     </div>
+
+    <div *ngIf="isProductStockLimitReached" class="alert alert-danger alert-dismissible fade show" role="alert">
+      Product stock limit reached!
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
     <ul class="list-group">
 
       <table class="table" *ngIf="customer.id !== undefined">
@@ -38,9 +46,13 @@
             <td>{{orderDetail.product.name}}</td>
             <td>{{orderDetail.product.price | currency:'&#8377;'}}</td>
             <td>
-              <button *ngIf="!togglePaymentOptions && !disableButtons" (click)="incrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">+</button>
+              <button *ngIf="!togglePaymentOptions && !disableButtons" (click)="incrementProductQuantity(orderDetail)" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
               {{orderDetail.quantity}}
-              <button *ngIf="!togglePaymentOptions && !disableButtons" (click)="decrementProductQuantity(orderDetail)" class="btn btn-primary btn-sm">-</button>
+              <button *ngIf="!togglePaymentOptions && !disableButtons" (click)="decrementProductQuantity(orderDetail)" class="btn btn-outline-primary btn-sm">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </button>
             </td>
             <td>{{orderDetail.quantity * orderDetail.product.price | currency:'&#8377;'}}</td>
           </tr>
@@ -61,8 +73,10 @@
       </li>
     </ul>
 
-    <button [disabled]="!orderDetails || orderDetails.length == 0" class="btn btn-primary form-control" style="margin-top: 100px;"
-      *ngIf="!togglePaymentOptions" (click)="togglePaymentOptions=true">Checkout</button>
+    <button [disabled]="!orderDetails || orderDetails.length == 0" class="btn btn-outline-success form-control" style="margin-top: 100px;"
+      *ngIf="!togglePaymentOptions" (click)="togglePaymentOptions=true">Checkout
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    </button>
 
 
     <!-- To be displayed on click on checkout -->

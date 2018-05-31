@@ -5,16 +5,13 @@ import { Observable } from 'rxjs/Observable';
 import { CashDrawer } from '../models/cash_drawer';
 import { catchError } from 'rxjs/operators';
 import { PosErrorHandler } from '../models/error_handler';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { Constants } from '../constants';
 
 
 @Injectable()
 export class OrderService {
 
-  URL = 'http://localhost:8080/'
+  URL = Constants.BASE_URL
 
   constructor(private http: HttpClient) { }
 
@@ -44,7 +41,7 @@ export class OrderService {
   }
 
   placeOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.URL + `employees/${order.employeeId}/customers/${order.customerId}/orders/`, order, httpOptions)
+    return this.http.post<Order>(this.URL + `employees/${order.employeeId}/customers/${order.customerId}/orders/`, order, Constants.httpOptions)
     .pipe(
       catchError(PosErrorHandler.handleError<Order>('placeOrder'))
     )

@@ -8,7 +8,7 @@ import { SaveOrdersDasboardComponent } from './components/save-orders-dasboard/s
 import { AuthGuardService } from './services/auth/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'checkout', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   { path: 'checkout', component: CheckoutDasboardComponent, canActivate: [AuthGuardService] },
   { path: 'orders', component: OrdersListDasboardComponent, canActivate: [AuthGuardService] },

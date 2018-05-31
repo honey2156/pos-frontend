@@ -5,11 +5,12 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of'
 import { catchError } from 'rxjs/operators';
 import { PosErrorHandler } from '../models/error_handler';
+import { Constants } from '../constants';
 
 @Injectable()
 export class CustomerService {
 
-  URL = 'http://localhost:8080/customers/'
+  URL = Constants.BASE_URL + 'customers/'
 
   constructor(private http: HttpClient) { }
 

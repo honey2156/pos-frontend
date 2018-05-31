@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loggedUser: Employee
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl('', Validators.required),
+    username: new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ][a-zA-Z0-9]*')]),
     password: new FormControl('', Validators.required)
   })
   isUserValid = true

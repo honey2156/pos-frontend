@@ -11,7 +11,9 @@
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-group">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fa fa-user prefix"></i></span>
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fa fa-user prefix"></i>
+            </span>
           </div>
           <input type="text" formControlName="username" class="form-control " placeholder="username">
         </div>
@@ -21,11 +23,17 @@
           <div *ngIf="loginForm.controls.username.errors.required">
             username is required.
           </div>
+
+          <div *ngIf="loginForm.controls.username.errors.pattern">
+            username can only be combination of alphabets and numbers starting with alphabet.
+          </div>
         </div>
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"><i class="fa fa-key prefix"></i></span>
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fa fa-key prefix"></i>
+            </span>
           </div>
           <input type="password" formControlName="password" class="form-control" placeholder="password">
         </div>
@@ -36,9 +44,9 @@
             password is required.
           </div>
         </div>
-     
+
         <input type="submit" value="Login" [disabled]="loginForm.invalid" class="form-control m-2 btn btn-primary">
-     
+
       </form>
 
       <div *ngIf="!isUserValid" class="alert alert-danger alert-dismissible fade show" role="alert">

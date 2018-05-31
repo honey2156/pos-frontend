@@ -12,16 +12,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul *ngIf="loggedUser.id" class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/checkout" class="nav-link">Checkout</a>
+          <a routerLink="/checkout" class="nav-link"><i class="fas fa-shopping-cart"></i> Checkout</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/orders" class="nav-link">Orders List</a>
+          <a routerLink="/orders" class="nav-link"><i class="fas fa-tags"></i> Orders</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/saved-orders" class="nav-link">Save Orders</a>
+          <a routerLink="/saved-orders" class="nav-link"><i class="fas fa-tags"></i> Saved Orders</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/cash-drawer" class="nav-link">Cash drawer</a>
+          <a routerLink="/cash-drawer" class="nav-link"><i class="fas fa-box"></i> Cash drawer</a>
         </li>
       </ul>
       <ul  *ngIf="loggedUser.id" class="navbar nav">
@@ -31,7 +31,7 @@
       </ul>
       <!-- <button *ngIf="!loggedUser.id" routerLink="/login" class="btn btn-secondary">Login</button> -->
       <button *ngIf="loggedUser.id" (click)="downloadReport()" class="btn btn-outline-light btn-sm" title="Report" data-toggle="tooltip"><i class="fa fa-list-alt" aria-hidden="true"></i></button>
-      <button *ngIf="loggedUser.id" (click)="confirmDrawer()" class="btn btn-outline-light btn-sm ml-2" data-toggle="modal" data-target="#confirmDrawerModal">logout</button>
+      <button *ngIf="loggedUser.id" (click)="confirmDrawer()" class="btn btn-outline-light btn-sm ml-2" data-toggle="modal" data-target="#confirmDrawerModal">logout <i class="fas fa-sign-out-alt"></i></button>
     </div>
   </div>
 </nav>

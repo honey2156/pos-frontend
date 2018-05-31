@@ -1,5 +1,7 @@
 <div class="container">
-  <div class="row">
-    <app-product *ngFor="let product of products$ | async " [product]="product"></app-product>
+  <div style="overflow-y: auto;max-height: 750px; width: 100%;">
+    <div class="row">
+      <app-product *ngFor="let product of products$ | async " [product]="product"></app-product>
+    </div>
   </div>
 </div>

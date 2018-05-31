@@ -14,8 +14,26 @@
         </label>
       </div>
       <div *ngIf="!drawer">
-        <input #balanceInput type="text" placeholder="Enter starting balance" class="form-control">
-        <button (click)="setOpeningBalance(balanceInput.value)" class="form-control btn btn-primary">Enter</button>
+
+        <form [formGroup]="cashDrawerForm" (ngSubmit)="setOpeningBalance(cashDrawerForm.controls.startingBalance.value)">
+          <input type="text" formControlName="startingBalance" placeholder="Enter starting balance" class="form-control mb-3">
+          <div *ngIf="cashDrawerForm.controls.startingBalance.invalid && (cashDrawerForm.controls.startingBalance.dirty || cashDrawerForm.controls.startingBalance.touched)"
+            class="alert alert-warning">
+            <div *ngIf="cashDrawerForm.controls.startingBalance.errors.required">
+              Starting balance can not be empty.
+            </div>
+
+            <div *ngIf="cashDrawerForm.controls.startingBalance.errors.min">
+              Starting balance can not be negative.
+            </div>
+
+            <div *ngIf="cashDrawerForm.controls.startingBalance.errors.pattern">
+              Starting balance should be valid number upto 2 decimals.
+            </div>
+          </div>
+          <button type="submit" [disabled]="cashDrawerForm.invalid" class="form-control btn btn-primary">Enter</button>
+        </form>
+
       </div>
     </div>
 

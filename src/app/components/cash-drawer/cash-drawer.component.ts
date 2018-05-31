@@ -3,6 +3,7 @@ import { CashDrawer } from '../../models/cash_drawer';
 import { CashDrawerService } from '../../services/cash-drawer.service';
 import { OrderService } from '../../services/order.service';
 import { ReportService } from '../../services/report.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cash-drawer',
@@ -14,6 +15,9 @@ export class CashDrawerComponent implements OnInit {
   drawer: CashDrawer
   employeeId: number
   groupedOrders = []
+  cashDrawerForm: FormGroup = new FormGroup({
+    startingBalance: new FormControl('', [Validators.required, Validators.min(0), Validators.pattern('[0-9]*\.?[0-9]{1,2}')])
+  })
 
   constructor(
     private cashDrawerService: CashDrawerService,
@@ -57,9 +61,11 @@ export class CashDrawerComponent implements OnInit {
 
 
   setOpeningBalance(startingBalance: number) {
+    if (startingBalance < 0) {
+      return;
+    }
     this.cashDrawerService.setOpeningDrawer(this.employeeId, { startingBalance } as CashDrawer)
       .subscribe((data) => {
-        console.log(data)
         this.getCashDrawer()
       })
   }

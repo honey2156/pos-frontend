@@ -1,7 +1,7 @@
 <div *ngIf="order && order.id">
     <nav class="navbar navbar-light bg-light">
       <a class="navbar-brand">Order Id: #{{order.id}}</a>
-      <button (click)="reloadOrder(order)" class="btn btn-outline-dark btn-sm">
+      <button (click)="reloadOrder(order)" class="btn btn-outline-dark btn-sm" data-toggle="tooltip" title="reload cart">
           <i class="fas fa-sync-alt"></i>
         </button>
     </nav>

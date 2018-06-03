@@ -32,6 +32,7 @@ import { ProductDataService } from './services/product-data.service';
 import { ProductService } from './services/product.service';
 import { ReloadCartService } from './services/reload-cart.service';
 import { ReportService } from './services/report.service';
+import { ErrorpageComponent } from './components/errorpage/errorpage.component';
 
 
 
@@ -53,7 +54,8 @@ import { ReportService } from './services/report.service';
     CashDrawerComponent,
     LoginComponent,
     OrdersListDetailComponent,
-    SavedOrdersDetailComponent
+    SavedOrdersDetailComponent,
+    ErrorpageComponent
   ],
   imports: [
     BrowserModule,

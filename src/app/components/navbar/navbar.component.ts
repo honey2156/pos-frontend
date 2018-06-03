@@ -37,6 +37,9 @@ export class NavbarComponent implements OnInit {
         if (user && user.id) {
           this.loggedUser = user
         }
+        else{
+          this.loggedUser = this.getLoginStatus()
+        }
       })
   }
 

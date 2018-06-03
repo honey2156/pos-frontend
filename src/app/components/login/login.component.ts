@@ -34,8 +34,13 @@ export class LoginComponent implements OnInit {
     this.loginService.login(employee)
       .subscribe(employee => {
         if (employee && employee.id) {
-          this.loggedUser = employee
-          alert('loggedin successfully')
+          let user = new Employee()
+          user.id = employee.id
+          user.name = employee.name
+          user.email = employee.email
+          user.username = employee.username
+          this.loggedUser = user
+          // alert('loggedin successfully')
           localStorage.setItem('loggedUser', JSON.stringify(this.loggedUser))
           this.loginDataService.updateLoggedUser(this.loggedUser)
           this.route.navigate(['cash-drawer'])

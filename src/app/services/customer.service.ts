@@ -7,6 +7,9 @@ import { catchError } from 'rxjs/operators';
 import { PosErrorHandler } from '../models/error_handler';
 import { Constants } from '../constants';
 
+/**
+ * Customer Service
+ */
 @Injectable()
 export class CustomerService {
 
@@ -14,6 +17,12 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Search customers based on search input
+   * 
+   * @param searchPattern 
+   * @returns Observable<Customer[]>
+   */
   searchCustomers(searchPattern: string): Observable<Customer[]> {
     if (!searchPattern.trim()) {
       return of([])

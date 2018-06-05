@@ -7,6 +7,9 @@ import { catchError } from 'rxjs/operators';
 import { PosErrorHandler } from '../models/error_handler';
 import { Constants } from '../constants';
 
+/**
+ * Product Service
+ */
 @Injectable()
 export class ProductService {
 
@@ -14,10 +17,21 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Get all products
+   * 
+   * @returns Observable<Product[]>
+   */
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.URL + 'products')
   }
 
+  /**
+   * Search products by search pattern
+   * 
+   * @param searchPattern 
+   * @returns Observable<Product[]>
+   */
   searchProducts(searchPattern: string): Observable<Product[]> {
     if (!searchPattern.trim()) {
       return this.getAllProducts()

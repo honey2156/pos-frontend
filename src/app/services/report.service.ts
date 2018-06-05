@@ -4,6 +4,9 @@ import { CashDrawerService } from './cash-drawer.service';
 import { OrderService } from './order.service';
 import { Employee } from '../models/employee';
 
+/**
+ * Report Service
+ */
 @Injectable()
 export class ReportService {
 
@@ -16,13 +19,24 @@ export class ReportService {
     private cashDrawerService: CashDrawerService,
     private orderService: OrderService) { }
 
-
+  /**
+   * Method called from view to generate and download report
+   * 
+   * @param user 
+   */
   generateAndDownloadReport(user: Employee) {
+    // Set logged user
     this.loggedUser = user
     this.employeeId = this.loggedUser.id
+    // initialize report
     this.setReport()
   }
 
+  /**
+   * Method to download generated report as excel file
+   * 
+   * @param reports 
+   */
   downloadCSVFile(reports: Report[]) {
     var csvData = this.ConvertToCSV(reports);
     var a = document.createElement("a");
@@ -35,6 +49,11 @@ export class ReportService {
     a.click();
   }
 
+  /**
+   * Method to convert json object into csv
+   * 
+   * @param objArray 
+   */
   ConvertToCSV(objArray: Report[]) {
     var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
     var str = '';
@@ -58,6 +77,9 @@ export class ReportService {
     return str;
   }
 
+  /**
+   * Get all transaction details of employee
+   */
   getTransactions() {
     this.orderService.getEmployeeAlldrawers(this.employeeId)
       .subscribe((employeeDrawers) => {
@@ -88,6 +110,9 @@ export class ReportService {
       })
   }
 
+  /**
+   * Generates summary for each day and downloads as excel file
+   */
   generateReportFromOrders() {
     let reports: Report[] = []
     this.reportOrders.forEach(element => {
@@ -97,6 +122,11 @@ export class ReportService {
     this.reportOrders = []
   }
 
+  /**
+   * Generates summary for given day
+   * 
+   * @param element 
+   */
   createReportRecord(element): Report {
     let obj = new Report()
     obj.Date = element.orderDate
@@ -122,6 +152,9 @@ export class ReportService {
     return obj
   }
 
+  /**
+   * 
+   */
   setReport() {
     this.getTransactions()
   }

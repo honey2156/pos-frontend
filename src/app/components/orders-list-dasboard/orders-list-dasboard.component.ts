@@ -40,7 +40,7 @@ export class OrdersListDasboardComponent implements OnInit {
         dateOrders.push(this.orders[j])
         // console.log(i + ' ' + this.orders[j].orderDate)
       }
-      i = j
+      i = j ? j - 1 : j
       this.groupedOrders.push({
         orderDate: date,
         orders: dateOrders
